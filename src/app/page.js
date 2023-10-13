@@ -1,12 +1,11 @@
 'use client'
 
 import Head from "next/head";
-import styles from "./styles/Home.module.css"
-
-import Header from "../components/header.js";
-import HeroSection from "../components/heroSection.js";
-import SearchComp from "../components/search.js";
-
+// import styles from "./styles/Home.module.css"
+import styles from "@/styles/Home.module.css"
+import Header from "@/components/Header";
+import HeroSection from "@/components/Herosection";
+import SearchComp from "@/components/SearchResults"
 export default function Home() {
   return (
     <>

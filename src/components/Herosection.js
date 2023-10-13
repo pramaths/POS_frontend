@@ -1,4 +1,4 @@
-'use client'
+
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
@@ -30,7 +30,7 @@ export default function HeroSection() {
 
     const getBlockInfo = async () => {
       const response = await axios.get(
-        `http://localhost:5001/getblockinfo`,
+        `http://localhost:8000/api/get/blocksinfo`,
         {}
       );
       console.log("rrr", response);
