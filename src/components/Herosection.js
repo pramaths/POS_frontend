@@ -24,33 +24,36 @@ export default function HeroSection() {
 
   useEffect(() => {
     const getEthPrice = async () => {
-      const response = await axios.get(`http://localhost:5001/getethprice`, {});
-      setEthPrice(response.data.usdPrice);
+      const response = await axios.get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=HVHTPWF3UJ8P5ZEDNUZYMT28ZZNEEURRD4`, {});
+      setEthPrice(response.data.result.ethusd);
     };
-
+const latesttransaction=async(req,res)=>{
+  const response= await axios.get
+}
     const getBlockInfo = async () => {
       const response = await axios.get(
-        `http://localhost:8000/api/get/blocksinfo`,
+        `https://proof-of-stake.onrender.com/api/get/blocks`,
         {}
       );
-      console.log("rrr", response);
+      
+      console.log("rrr", response.data);
       const blockArray = [
-        response.data.previousBlockInfo[1],
-        response.data.previousBlockInfo[2],
-        response.data.previousBlockInfo[3],
-        response.data.previousBlockInfo[4],
-        response.data.previousBlockInfo[5],
+        response.data.blocksdata[1],
+        response.data.blocksdata[2],
+        response.data.blocksdata[3],
+        response.data.blocksdata[4],
+        response.data.blocksdata[5],
       ];
 
-      const transactions = [response.data.previousBlockInfo[0].transactions];
+      const transactions = [response.data.blocksdata[0].transactions];
 
       console.log("transactions", transactions[0]);
       setTotalTransactions(
-        response.data.previousBlockInfo[1].totalTransactions
+        response.data.blocksdata[1].totalTransactions
       );
       setLatestBlock(response.data.latestBlock);
       setBlockResult(blockArray);
-      setTransactionsResult(response.data.previousBlockInfo[0].transactions);
+      setTransactionsResult(response.data.blocksdata[0].transactions);
     };
 
     getEthPrice();
@@ -174,7 +177,7 @@ export default function HeroSection() {
                         </td>
                         <td className={styles.tdBlock}>
                           <section className={styles.blueText}>
-                            {block.blockNumber}
+                            {block.nonce}
                           </section>
                           <section>
                             {moment(block.time, "YYYYMMDD").fromNow()}
@@ -184,9 +187,15 @@ export default function HeroSection() {
                           <section>
                             Fee Recipient{" "}
                             <span className={styles.blueText}>
-                              {block.miner.slice(0, 6)}...
-                              {block.miner.slice(36)}
-                            </span>
+  {block.validator ? (
+    <React.Fragment>
+      {block.validator.slice(0, 6)}...
+      {block.validator.slice(36)}
+    </React.Fragment>
+  ) : (
+    "N/A" 
+  )}
+</span>
                           </section>
                           <section>
                             <span className={styles.blueText}>

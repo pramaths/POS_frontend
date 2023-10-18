@@ -453,3 +453,34 @@
 .tdFromTo {
   width: 16rem;
 }
+
+.popupcontainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  z-index: 1000; /* Ensure it's on top of other content */
+}
+
+.popupcontent {
+  background-color: rgb(23, 23, 23);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  max-width: 80%; /* Adjust the width as needed */
+  text-align: center;
+}
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
