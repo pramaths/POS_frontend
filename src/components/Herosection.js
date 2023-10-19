@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import moment from "moment";
@@ -27,15 +27,30 @@ export default function HeroSection() {
       const response = await axios.get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=HVHTPWF3UJ8P5ZEDNUZYMT28ZZNEEURRD4`, {});
       setEthPrice(response.data.result.ethusd);
     };
-const latesttransaction=async(req,res)=>{
-  const response= await axios.get
-}
+    const latesttransaction = async () => {
+      try {
+        const responsetransaction = await axios.get(`https://proof-of-stake.onrender.com/api/get/transactions`);
+        console.log(responsetransaction.data); 
+        if (responsetransaction.data && responsetransaction.data.tranasactions) {
+          console.log("Unsorted", responsetransaction.data.tranasactions);
+          const sortedTransactions = responsetransaction.data.tranasactions
+            .filter(txn => txn.createdAt)
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          console.log("sorted", sortedTransactions);
+          setTransactionsResult(sortedTransactions.slice(0, 5));
+        }
+      } catch (error) {
+        console.error("Error fetching transactions:", error);
+      }
+    }
+    
     const getBlockInfo = async () => {
       const responseblocks = await axios.get(
         `https://proof-of-stake.onrender.com/api/get/blocks`,
         {}
+        
       );
-      
+     
       console.log("rrr", responseblocks.data);
       const blockArray = [
         responseblocks.data.blocksdata[6],
@@ -45,20 +60,17 @@ const latesttransaction=async(req,res)=>{
         responseblocks.data.blocksdata[10],
       ];
 
-      const transactions = [responseblocks.data.blocksdata[0].transactions];
-
-      console.log("transactions", transactions[0]);
-      setTotalTransactions(
-        responseblocks.data.blocksdata[1].totalTransactions
-      );
       setLatestBlock(responseblocks.data.latestBlock);
       setBlockResult(blockArray);
-      setTransactionsResult(responseblocks.data.blocksdata[0].transactions);
+      // setTransactionsResult(responseblocks.data.blocksdata[0].transactions);
+   
     };
 
     getEthPrice();
     getBlockInfo();
-  }, []);
+    latesttransaction();
+    // latesttransaction();
+  }, [transactionsResult]);
 
   return (
     <section className={styles.heroSectionContainer}>
@@ -180,7 +192,7 @@ const latesttransaction=async(req,res)=>{
                             {block.nonce}
                           </section>
                           <section>
-                            {moment(block.time, "YYYYMMDD").fromNow()}
+                            {moment(block.timestamp, "YYYYMMDD").fromNow()}
                           </section>
                         </td>
                         <td className={styles.tdTxns}>
@@ -189,8 +201,8 @@ const latesttransaction=async(req,res)=>{
                             <span className={styles.blueText}>
   {block.validator ? (
     <React.Fragment>
-      {block.validator.slice(0, 6)}...
-      {block.validator.slice(36)}
+      {block.validator.address.slice(0, 6)}...
+      {block.validator.address.slice(36)}
     </React.Fragment>
   ) : (
     "N/A" 
@@ -199,11 +211,11 @@ const latesttransaction=async(req,res)=>{
                           </section>
                           <section>
                             <span className={styles.blueText}>
-                              {block.totalTransactions} txns
+                              {block.transactions.length} txns
                             </span>
                           </section>
                         </td>
-                        <td className={styles.tdValue}>{block.gasUsed} Eth</td>
+                        <td className={styles.tdValue}>{block.validator.rewardAmount} Eth</td>
                       </tr>
                     );
                   })}
@@ -223,7 +235,7 @@ const latesttransaction=async(req,res)=>{
                           transactionsResult.indexOf(txn) ==
                             transactionsResult.length - 1 && styles.lastTd
                         }`}
-                        key={txn.transactionHash}
+                        key={txn.txhash}
                       >
                         <td className={styles.tdContract}>
                           <FontAwesomeIcon
@@ -236,22 +248,22 @@ const latesttransaction=async(req,res)=>{
                             {txn.transactionHash?.slice(0, 14)}...
                           </section>
                           <section>
-                            {moment(txn.time, "YYYYMMDD").fromNow()}
+                            {moment(txn.createdAt, "YYYYMMDD").fromNow()}
                           </section>
                         </td>
                         <td className={styles.tdFromTo}>
                           <section>
                             From{" "}
                             <span className={styles.blueText}>
-                              {txn.fromAddress?.slice(0, 6)}...
-                              {txn.fromAddress?.slice(36)}
+                              {txn.sender?.slice(0, 6)}...
+                              {txn.sender?.slice(36)}
                             </span>
                           </section>
                           <section>
                             To{" "}
                             <span className={styles.blueText}>
-                              {txn.toAddress?.slice(0, 6)}...
-                              {txn.toAddress?.slice(36)}
+                              {txn.recipient?.slice(0, 6)}...
+                              {txn.recipient?.slice(36)}
                             </span>
                             <span className={styles.blueText}>
                               {txn.totalTransactions}
@@ -259,7 +271,7 @@ const latesttransaction=async(req,res)=>{
                           </section>
                         </td>
                         <td className={styles.tdValue}>
-                          {(Number(txn.value) / 10 ** 18).toFixed(4)} Eth
+                          {(Number(txn.amount)).toFixed(2)} Eth
                         </td>
                       </tr>
                     );
