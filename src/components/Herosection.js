@@ -31,18 +31,18 @@ const latesttransaction=async(req,res)=>{
   const response= await axios.get
 }
     const getBlockInfo = async () => {
-      const response = await axios.get(
+      const responseblocks = await axios.get(
         `https://proof-of-stake.onrender.com/api/get/blocks`,
         {}
       );
       
-      console.log("rrr", response.data);
+      console.log("rrr", responseblocks.data);
       const blockArray = [
-        response.data.blocksdata[1],
-        response.data.blocksdata[2],
-        response.data.blocksdata[3],
-        response.data.blocksdata[4],
-        response.data.blocksdata[5],
+        response.data.blocksdata[6],
+        response.data.blocksdata[7],
+        response.data.blocksdata[8],
+        response.data.blocksdata[9],
+        response.data.blocksdata[10],
       ];
 
       const transactions = [response.data.blocksdata[0].transactions];
