@@ -1,6 +1,6 @@
 
 
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";

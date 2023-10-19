@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import styles from "../styles/Home.module.css";
 import { Bean, Beans } from "@web3uikit/icons";
