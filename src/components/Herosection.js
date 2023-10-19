@@ -38,22 +38,22 @@ const latesttransaction=async(req,res)=>{
       
       console.log("rrr", responseblocks.data);
       const blockArray = [
-        response.data.blocksdata[6],
-        response.data.blocksdata[7],
-        response.data.blocksdata[8],
-        response.data.blocksdata[9],
-        response.data.blocksdata[10],
+        responseblocks.data.blocksdata[6],
+        responseblocks.data.blocksdata[7],
+        responseblocks.data.blocksdata[8],
+        responseblocks.data.blocksdata[9],
+        responseblocks.data.blocksdata[10],
       ];
 
-      const transactions = [response.data.blocksdata[0].transactions];
+      const transactions = [responseblocks.data.blocksdata[0].transactions];
 
       console.log("transactions", transactions[0]);
       setTotalTransactions(
-        response.data.blocksdata[1].totalTransactions
+        responseblocks.data.blocksdata[1].totalTransactions
       );
-      setLatestBlock(response.data.latestBlock);
+      setLatestBlock(responseblocks.data.latestBlock);
       setBlockResult(blockArray);
-      setTransactionsResult(response.data.blocksdata[0].transactions);
+      setTransactionsResult(responseblocks.data.blocksdata[0].transactions);
     };
 
     getEthPrice();
