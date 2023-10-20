@@ -19,9 +19,8 @@ export default function HeroSection() {
   const [blockResult, setBlockResult] = useState([]);
   const [transactionsResult, setTransactionsResult] = useState([]);
   const [ethPrice, setEthPrice] = useState("");
-  const [totalTransactions, setTotalTransactions] = useState("");
+  const [totalTransactions, setTotalTransactions] = useState(0);
   const [latestBlock, setLatestBlock] = useState("");
-
   useEffect(() => {
     const getEthPrice = async () => {
       const response = await axios.get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=HVHTPWF3UJ8P5ZEDNUZYMT28ZZNEEURRD4`, {});
@@ -37,6 +36,7 @@ export default function HeroSection() {
             .filter(txn => txn.createdAt)
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
           console.log("sorted", sortedTransactions);
+          setTotalTransactions(responsetransaction.data.tranasactions.length)
           setTransactionsResult(sortedTransactions.slice(0, 5));
         }
       } catch (error) {
@@ -245,7 +245,7 @@ export default function HeroSection() {
                         </td>
                         <td className={styles.tdBlock}>
                           <section className={styles.blueText}>
-                            {txn.transactionHash?.slice(0, 14)}...
+                            {txn.txHash?.slice(0, 14)}...
                           </section>
                           <section>
                             {moment(txn.createdAt, "YYYYMMDD").fromNow()}

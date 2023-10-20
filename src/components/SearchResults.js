@@ -10,7 +10,7 @@ import SearchResults from "./SearchResults.js";
 export default function Search() {
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState([]);
-  const [searchInput, setSearchInput] = useState("");
+  const [searchinput, setSearchInput] = useState("");
 
   const changeHandler = (e) => {
     setSearchInput(e.target.value);
@@ -19,14 +19,15 @@ export default function Search() {
   const handleSearch = async () => {
     document.querySelector("#inputField").value = "";
 
-    const response = await axios.get("http://localhost:5001/address", {
-      params: { address: searchInput },
+    const response = await axios.get("https://proof-of-stake.onrender.com/api/get/txs", {
+      params: { address: searchinput },
     });
 
-    setResult(response.data.result);
+    setResult(response.data);
+
     setShowResult(true);
   };
-
+console.log(result)
   return (
     <section className={styles.searchContainer}>
       <section className={styles.searchHeader}>
@@ -78,7 +79,7 @@ export default function Search() {
           </section>
         </section>
       </section>
-      {showResult && <SearchResults result={{ result, searchInput }} />}
+      {showResult && <SearchResults result={{ result, searchinput }} />}
     </section>
   );
 }
