@@ -11,7 +11,7 @@ export default function Header() {
 
   useEffect(() => {
     const createdAddress = Cookie.get("walletaddress");
-    console.log(createdAddress)
+    console.log("cookieaddress",createdAddress)
     if (createdAddress) {
       fetchAccountData();
     }
