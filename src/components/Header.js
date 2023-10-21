@@ -11,6 +11,8 @@ export default function Header() {
 
   useEffect(() => {
     const createdAddress = Cookie.get("walletaddress");
+    const publicKey=Cookie.get("publicKey")
+    console.log("pubkey",publicKey)
     console.log("cookieaddress",createdAddress)
     if (createdAddress) {
       fetchAccountData();
