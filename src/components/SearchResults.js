@@ -17,11 +17,13 @@ export default function Search() {
   };
 
   const handleSearch = async () => {
+    setSearchInput('');
     document.querySelector("#inputField").value = "";
+const response = await axios.get("https://proof-of-stake.onrender.com/api/get/txs", {
+  withCredentials: true,
+  params: { address: searchinput },
+});
 
-    const response = await axios.get("https://proof-of-stake.onrender.com/api/get/txs", {
-      params: { address: searchinput },
-    });
 
     setResult(response.data);
 

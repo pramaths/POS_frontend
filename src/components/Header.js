@@ -1,5 +1,3 @@
-
-
 import React,{ useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
@@ -13,6 +11,7 @@ export default function Header() {
 
   useEffect(() => {
     const createdAddress = Cookie.get("walletaddress");
+    console.log(createdAddress)
     if (createdAddress) {
       fetchAccountData();
     }
@@ -24,7 +23,9 @@ export default function Header() {
 
   const fetchAccountData = async () => {
     try {
-      const response = await axios.get("https://proof-of-stake.onrender.com/api/get/account");
+      const response = await axios.get("https://proof-of-stake.onrender.com/api/get/account", { withCredentials: true });
+      console.log("Cookies Set:", req.cookies);
+
       setAccountData(response.data);
     } catch (error) {
       console.error("Error fetching wallet data:", error);
@@ -33,7 +34,8 @@ export default function Header() {
 
   const handleCreateAccount = async () => {
     try {
-      const response = await axios.post("https://proof-of-stake.onrender.com/api/wallet/generatekeys");
+
+      const response = await axios.post("https://proof-of-stake.onrender.com/api/wallet/generatekeys", { withCredentials: true });
       console.log(response.data)
       setAccountData(response.data);
       togglePopup();
@@ -166,11 +168,11 @@ export default function Header() {
       {showPopup && (
   <div className={styles.popupcontainer}>
     <div className={styles.popupcontent}>
-      <button onClick={togglePopup} className={styles.closeButton}>
-        X
-      </button>
       {accountData ? (
         <div>
+          <button onClick={togglePopup} className={styles.closeButton}>
+        X
+      </button>
           <p>Public Key: {accountData.publicKey}</p>
           <p>privateKey Key: {accountData.privateKey}</p>
           <p>Address: {accountData.address}</p>
@@ -180,7 +182,6 @@ export default function Header() {
           <button>Transactions</button>
         </div>
       ) : (
-        // Display Create Account content
         <div>
           <p>Public Key: {accountData.publicKey}</p>
           <p>Address: {accountData.address}</p>

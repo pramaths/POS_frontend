@@ -28,7 +28,7 @@ export default function HeroSection() {
     };
     const latesttransaction = async () => {
       try {
-        const responsetransaction = await axios.get(`https://proof-of-stake.onrender.com/api/get/transactions`);
+        const responsetransaction = await axios.get(`https://proof-of-stake.onrender.com/api/get/transactions`, { withCredentials: true });
         console.log(responsetransaction.data); 
         if (responsetransaction.data && responsetransaction.data.tranasactions) {
           console.log("Unsorted", responsetransaction.data.tranasactions);
@@ -46,9 +46,7 @@ export default function HeroSection() {
     
     const getBlockInfo = async () => {
       const responseblocks = await axios.get(
-        `https://proof-of-stake.onrender.com/api/get/blocks`,
-        {}
-        
+        `https://proof-of-stake.onrender.com/api/get/blocks`, { withCredentials: true }
       );
      
       console.log("rrr", responseblocks.data);
@@ -70,7 +68,7 @@ export default function HeroSection() {
     getBlockInfo();
     latesttransaction();
     // latesttransaction();
-  }, [transactionsResult]);
+  }, []);
 
   return (
     <section className={styles.heroSectionContainer}>
@@ -245,7 +243,7 @@ export default function HeroSection() {
                         </td>
                         <td className={styles.tdBlock}>
                           <section className={styles.blueText}>
-                            {txn.txHash?.slice(0, 14)}...
+                            0x{txn.txHash?.slice(0, 14)}...
                           </section>
                           <section>
                             {moment(txn.createdAt, "YYYYMMDD").fromNow()}
