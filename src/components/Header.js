@@ -14,6 +14,8 @@ export default function Header() {
     const publicKey=Cookie.get("publicKey")
     console.log("pubkey",publicKey)
     console.log("cookieaddress",createdAddress)
+    console.log("wla",req.cookies.walletaddress)
+    console.log("pbk",req.cookies.publicKey)
     if (createdAddress) {
       fetchAccountData();
     }
