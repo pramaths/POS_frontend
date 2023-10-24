@@ -19,7 +19,7 @@ export default function Search() {
   const handleSearch = async () => {
     setSearchinput('');
     document.querySelector("#inputField").value = "";
-    const response = await axios.get("https://proof-of-stake.onrender.com/api/get/txs", {
+    const response = await axios.get("localhost:8000/api/get/txs", {
       withCredentials: true,
       params: { address: searchinput },
     });

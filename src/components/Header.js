@@ -1,21 +1,47 @@
-import React,{ useEffect, useState } from "react";
+import React,{ useEffect, useState,useRef  } from "react";
 import axios from "axios";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import { useRouter } from 'next/navigation';import styles from "../styles/Home.module.css";
 import Cookie from 'js-cookie';
 const Logo = "/assets/logo.png";
+import StakePopup from './Stakepopup';
+import TransactionPopup from './TransactionPopup';
 export default function Header() {
   const [ethPrice, setEthPrice] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [accountData, setAccountData] = useState(null);
+  const [showStakePopup, setShowStakePopup] = useState(false);
+  const [showTransactionPopup, setShowTransactionPopup] = useState(false);
+  const walletPopupRef = useRef(null);
+  const router = useRouter();  
+  const handleStakeClick = () => {
+    setShowStakePopup(true);
+};
+const handleOutsideClick = (event) => {
+  if (walletPopupRef.current && !walletPopupRef.current.contains(event.target)) {
+    setShowPopup(false);
+  }
+};const navigateToBlockchainPage = () => {
+  router.push('/blockchain'); // navigating to the blockchain page
+};
+
+const navigateToNodePage = () => {
+  router.push('/node'); // navigating to the node page
+};
+useEffect(() => {
+
+  
+  document.addEventListener("mousedown", handleOutsideClick);
+  return () => {
+    document.removeEventListener("mousedown", handleOutsideClick);
+  };
+}, []);
 
   useEffect(() => {
     const createdAddress = Cookie.get("walletaddress");
     const publicKey=Cookie.get("publicKey")
     console.log("pubkey",publicKey)
     console.log("cookieaddress",createdAddress)
-    console.log("wla",req.cookies.walletaddress)
-    console.log("pbk",req.cookies.publicKey)
     if (createdAddress) {
       fetchAccountData();
     }
@@ -27,9 +53,7 @@ export default function Header() {
 
   const fetchAccountData = async () => {
     try {
-      const response = await axios.get("https://proof-of-stake.onrender.com/api/get/account", { withCredentials: true });
-      console.log("Cookies Set:", req.cookies);
-
+      const response = await axios.get("http://localhost:8000/api/get/account", { withCredentials: true });
       setAccountData(response.data);
     } catch (error) {
       console.error("Error fetching wallet data:", error);
@@ -39,8 +63,10 @@ export default function Header() {
   const handleCreateAccount = async () => {
     try {
 
-      const response = await axios.post("https://proof-of-stake.onrender.com/api/wallet/generatekeys", { withCredentials: true });
+      const response = await axios.post("http://localhost:8000/api/wallet/generatekeys", { withCredentials: true });
       console.log(response.data)
+      Cookie.set("walletaddress",response.data.address)
+      Cookie.set("publicKey",response.data.publicKey)
       setAccountData(response.data);
       togglePopup();
     } catch (error) {
@@ -68,101 +94,30 @@ export default function Header() {
         <Image src={Logo} alt="Etherscan Logo" className={styles.logo} width={10} height={10} />
         <section className={styles.menu}>
           <p>Home</p>
-          <p>
-            Blockchain
-            <span className={styles.arrow}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </span>
-          </p>
-          <p>
-            Token
-            <span className={styles.arrow}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </span>
-          </p>
-          <p>
-            NFTs
-            <span className={styles.arrow}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </span>
-          </p>
-          <p>
-            Resources
-            <span className={styles.arrow}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </span>
-          </p>
-          <p>
-            Developers
-            <span className={styles.arrow}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </span>
-          </p>
+          <p onClick={navigateToBlockchainPage}>
+  Blockchain
+</p>
+
+<p onClick={navigateToNodePage}>
+  Node
+</p>
+
+          <p onClick={() => setShowTransactionPopup(true)}>
+  Start Transaction
+</p>
+          <p onClick={handleStakeClick}>
+    Stake ETH
+</p>
+          
           <p onClick={togglePopup}>
             Wallet
           </p>
           <p>|</p>
           {accountData ? (
             <p className={styles.signIn} onClick={togglePopup}>
-              {accountData.address}
+              {accountData.address.slice(0,8)}...{accountData.address.slice(36,42)}
             </p>
           ) : (
-            // If the user doesn't have an account, display the "Create Account" button
             <p className={styles.signIn} onClick={handleCreateAccount}>
               Create Account
             </p>
@@ -170,8 +125,8 @@ export default function Header() {
         </section>
       </section>
       {showPopup && (
-  <div className={styles.popupcontainer}>
-    <div className={styles.popupcontent}>
+ <div className={styles.popupcontainer} onClick={handleOutsideClick}>
+ <div className={styles.popupcontent} ref={walletPopupRef}>
       {accountData ? (
         <div>
           <button onClick={togglePopup} className={styles.closeButton}>
@@ -195,6 +150,9 @@ export default function Header() {
     </div>
   </div>
 )}
+{showStakePopup && <StakePopup onClose={() => setShowStakePopup(false)} />}
+{showTransactionPopup && <TransactionPopup onClose={() => setShowTransactionPopup(false)} />}
+
     </section>
   );
 }

@@ -21,6 +21,17 @@ export default function HeroSection() {
   const [ethPrice, setEthPrice] = useState("");
   const [totalTransactions, setTotalTransactions] = useState(0);
   const [latestBlock, setLatestBlock] = useState("");
+
+
+  const handleStakeConfirm = () => {
+    const amountToStake = stakeAmount || "1"; 
+    setShowStakePopup(false); 
+  };
+  const handleTransactionsConfirm = () => {
+    const recipient = recipientAddress || "Put reciever address";  
+    const data = transactionData || "0X0";  
+    setShowTransactionsPopup(false); 
+  };
   useEffect(() => {
     const getEthPrice = async () => {
       const response = await axios.get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=HVHTPWF3UJ8P5ZEDNUZYMT28ZZNEEURRD4`, {});
@@ -28,7 +39,7 @@ export default function HeroSection() {
     };
     const latesttransaction = async () => {
       try {
-        const responsetransaction = await axios.get(`https://proof-of-stake.onrender.com/api/get/transactions`, { withCredentials: true });
+        const responsetransaction = await axios.get(`http://localhost:8000/api/get/transactions`, { withCredentials: true });
         console.log(responsetransaction.data); 
         if (responsetransaction.data && responsetransaction.data.tranasactions) {
           console.log("Unsorted", responsetransaction.data.tranasactions);
@@ -46,16 +57,16 @@ export default function HeroSection() {
     
     const getBlockInfo = async () => {
       const responseblocks = await axios.get(
-        `https://proof-of-stake.onrender.com/api/get/blocks`, { withCredentials: true }
+        `http://localhost:8000/api/get/blocks`, { withCredentials: true }
       );
      
       console.log("rrr", responseblocks.data);
       const blockArray = [
-        responseblocks.data.blocksdata[6],
-        responseblocks.data.blocksdata[7],
-        responseblocks.data.blocksdata[8],
-        responseblocks.data.blocksdata[9],
-        responseblocks.data.blocksdata[10],
+        responseblocks.data.blocksdata[5],
+        responseblocks.data.blocksdata[5],
+        responseblocks.data.blocksdata[5],
+        responseblocks.data.blocksdata[5],
+        responseblocks.data.blocksdata[5],
       ];
 
       setLatestBlock(responseblocks.data.latestBlock);
@@ -243,7 +254,7 @@ export default function HeroSection() {
                         </td>
                         <td className={styles.tdBlock}>
                           <section className={styles.blueText}>
-                            0x{txn.txHash?.slice(0, 14)}...
+                            0x{txn.txHash?.slice(0, 10)}...
                           </section>
                           <section>
                             {moment(txn.createdAt, "YYYYMMDD").fromNow()}
