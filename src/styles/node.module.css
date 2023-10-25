@@ -1,0 +1,89 @@
+.blockchainstatecontainer {
+  margin: 10px auto;
+  padding: 10px;
+  background-color: inherit;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.list-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Styling for the blue box */
+.blueBox {
+  background-color: #201f1f;
+  padding: 20px;
+  border-radius: 5px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* Styling for the list of blocks */
+.horizontalBlockchainList {
+  display: flex; 
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.block {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin-right: -10px;
+border-radius: 0.5rem;
+  padding: 10px;
+  flex-shrink: 0;
+}
+
+.shiningBorder {
+  border-color: gold;
+}
+
+.chainImage {
+  height: 6rem;
+  margin-right: -10px;
+}
+.horizontalBlockchainList::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.horizontalBlockchainList {
+  scrollbar-width: none;
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.backendcontainer{
+  margin: 1rem;
+  border: #444444;
+  border-radius: 1rem;
+}
+.backendBox {
+  border: 1px solid #000; /* Adjust the border color to your preference */
+  padding: 10px;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mempoolTableContainer {
+  width: 30%;
+  border-left: 1px solid #000; /* Add a divider line */
+  padding-left: 10px;
+}
+
+.mempoolTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mempoolTable th,
+.mempoolTable td {
+  border: 1px solid #ddd; /* Adjust for your preference */
+  padding: 8px;
+}

@@ -42,11 +42,9 @@ export default function HeroSection() {
         const responsetransaction = await axios.get(`http://localhost:8000/api/get/transactions`, { withCredentials: true });
         console.log(responsetransaction.data); 
         if (responsetransaction.data && responsetransaction.data.tranasactions) {
-          console.log("Unsorted", responsetransaction.data.tranasactions);
           const sortedTransactions = responsetransaction.data.tranasactions
             .filter(txn => txn.createdAt)
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-          console.log("sorted", sortedTransactions);
           setTotalTransactions(responsetransaction.data.tranasactions.length)
           setTransactionsResult(sortedTransactions.slice(0, 5));
         }

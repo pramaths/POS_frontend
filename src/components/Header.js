@@ -3,7 +3,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';import styles from "../styles/Home.module.css";
 import Cookie from 'js-cookie';
-const Logo = "/assets/logo.png";
+const Logo = "/assets/blockrolllogo.png";
 import StakePopup from './Stakepopup';
 import TransactionPopup from './TransactionPopup';
 export default function Header() {
@@ -77,8 +77,6 @@ useEffect(() => {
   useEffect(() => {
     const getEthPrice = async () => {
       const response = await axios.get("https://api.etherscan.io/api?module=stats&action=ethprice&apikey=HVHTPWF3UJ8P5ZEDNUZYMT28ZZNEEURRD4", {});
-      console.log(response.data)
-      console.log("hii",response.data.result.ethusd)
       setEthPrice(response.data.result.ethusd);
     };
     getEthPrice();
@@ -91,7 +89,7 @@ useEffect(() => {
         <span className={styles.blueText}>${Number(ethPrice).toFixed(2)}</span>
       </section>
       <section className={styles.navbar}>
-        <Image src={Logo} alt="Etherscan Logo" className={styles.logo} width={10} height={10} />
+        <Image src="/svg/logo-white.svg" alt="Etherscan Logo" className={styles.logo} width={10} height={5} />
         <section className={styles.menu}>
           <p>Home</p>
           <p onClick={navigateToBlockchainPage}>
