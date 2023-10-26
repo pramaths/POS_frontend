@@ -5,8 +5,26 @@ function StakePopup({ onClose }) {
   const [amount, setAmount] = useState("");
   const contentRef = useRef(null);
 
-  const handleStake = () => {
+  const handleStake = async() => {
     // Handle the staking logic here
+    // Send the data to the server
+    const response = await fetch('http://localhost:8000/api/account/stake', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({amount}),
+    });
+
+    if (response.ok) {
+      console.log('Staked succesfully.');
+      // Handle any further actions on success.
+    } else {
+      console.error('Error Staking');
+      // Handle errors.
+    }
+
     console.log("Staking amount:", amount);
     onClose();
   };

@@ -86,4 +86,5 @@ border-radius: 0.5rem;
 .mempoolTable td {
   border: 1px solid #ddd; /* Adjust for your preference */
   padding: 8px;
+  color: white;
 }

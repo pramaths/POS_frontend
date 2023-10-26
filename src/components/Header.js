@@ -1,7 +1,8 @@
 import React,{ useEffect, useState,useRef  } from "react";
 import axios from "axios";
 import Image from "next/image";
-import { useRouter } from 'next/navigation';import styles from "../styles/Home.module.css";
+import { useRouter } from 'next/navigation';
+import styles from "../styles/Home.module.css";
 import Cookie from 'js-cookie';
 const Logo = "/assets/blockrolllogo.png";
 import StakePopup from './Stakepopup';
