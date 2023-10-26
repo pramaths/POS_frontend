@@ -53,7 +53,8 @@ const Node = () => {
         console.error('Error fetching data:', err);
         setIsLoading(false);
       });
-
+console.log("hey dude",nodeData)
+console.log("hey bro",blocks)
     // Function to display the toast
     const displayToast = (nonce) => {
       toast.success(`Block mined with nonce : ${nonce}`, {

@@ -40,12 +40,12 @@ export default function HeroSection() {
     const latesttransaction = async () => {
       try {
         const responsetransaction = await axios.get(`http://localhost:8000/api/get/transactions`, { withCredentials: true });
-        console.log(responsetransaction.data); 
-        if (responsetransaction.data && responsetransaction.data.tranasactions) {
-          const sortedTransactions = responsetransaction.data.tranasactions
+        console.log("hello buddyy",responsetransaction.data); 
+        if (responsetransaction.data && responsetransaction.data.transactions) {
+          const sortedTransactions = responsetransaction.data.transactions
             .filter(txn => txn.createdAt)
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-          setTotalTransactions(responsetransaction.data.tranasactions.length)
+          setTotalTransactions(responsetransaction.data.transactions.length)
           setTransactionsResult(sortedTransactions.slice(0, 5));
         }
       } catch (error) {
