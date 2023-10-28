@@ -7,6 +7,8 @@ import Cookie from 'js-cookie';
 const Logo = "/assets/blockrolllogo.png";
 import StakePopup from './Stakepopup';
 import TransactionPopup from './TransactionPopup';
+import { useHistory } from 'react-router-dom';
+
 export default function Header() {
   const [ethPrice, setEthPrice] = useState("");
   const [showPopup, setShowPopup] = useState(false);
@@ -24,6 +26,10 @@ const handleOutsideClick = (event) => {
   }
 };const navigateToBlockchainPage = () => {
   router.push('/blockchain'); // navigating to the blockchain page
+};
+
+const navigateToHomePage = () => {
+  router.push('/');
 };
 
 const navigateToNodePage = () => {
@@ -90,9 +96,11 @@ useEffect(() => {
         <span className={styles.blueText}>${Number(ethPrice).toFixed(2)}</span>
       </section>
       <section className={styles.navbar}>
-        <Image src="/svg/logo-white.svg" alt="Etherscan Logo" className={styles.logo} width={10} height={5} />
+        {/* <Image src="/svg/logo-white.svg" alt="Etherscan Logo" className={styles.logo} width={10} height={5} />
+         */}
+         Block & Roll
         <section className={styles.menu}>
-          <p>Home</p>
+          <p onClick={navigateToHomePage}>Home</p>
           <p onClick={navigateToBlockchainPage}>
   Blockchain
 </p>
