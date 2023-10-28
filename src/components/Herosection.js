@@ -77,6 +77,12 @@ export default function HeroSection() {
     // latesttransaction();
   }, []);
 
+// Get the current date and time
+const currentDate = new Date();
+
+
+
+
   return (
     <section className={styles.heroSectionContainer}>
       {showResult && (
@@ -188,10 +194,9 @@ export default function HeroSection() {
                   {blockResult.map((block) => {
                     return (
                       <tr
-                        className={`${styles.latestResults_body_tr} ${
-                          blockResult.indexOf(block) ==
-                            blockResult.length - 1 && styles.lastTd
-                        }`}
+                        className={`${styles.latestResults_body_tr} ${blockResult.indexOf(block) ==
+                          blockResult.length - 1 && styles.lastTd
+                          }`}
                         key={block.blockNumber}
                       >
                         <td className={styles.tdIcon}>
@@ -202,7 +207,9 @@ export default function HeroSection() {
                             {block.nonce}
                           </section>
                           <section>
-                            {moment(block.timestamp, "YYYYMMDD").fromNow()}
+                            {
+                             ((new Date() - new Date(block.createdDate)) / 3600000).toFixed(2) + " hours ago"
+                            }
                           </section>
                         </td>
                         <td className={styles.tdTxns}>
@@ -243,10 +250,9 @@ export default function HeroSection() {
                   {transactionsResult.map((txn) => {
                     return (
                       <tr
-                        className={`${styles.latestResults_body_tr} ${
-                          transactionsResult.indexOf(txn) ==
-                            transactionsResult.length - 1 && styles.lastTd
-                        }`}
+                        className={`${styles.latestResults_body_tr} ${transactionsResult.indexOf(txn) ==
+                          transactionsResult.length - 1 && styles.lastTd
+                          }`}
                         key={txn.txhash}
                       >
                         <td className={styles.tdContract}>
@@ -260,7 +266,9 @@ export default function HeroSection() {
                             0x{txn.txHash?.slice(0, 10)}...
                           </section>
                           <section>
-                            {moment(txn.createdAt, "YYYYMMDD").fromNow()}
+                            {
+                              ((new Date() - new Date(txn.createdAt)) / 3600000).toFixed(2) + " hours ago"
+                            }
                           </section>
                         </td>
                         <td className={styles.tdFromTo}>
