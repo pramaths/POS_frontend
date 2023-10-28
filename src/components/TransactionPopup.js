@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState ,useRef } from 'react';
 import styles from '../styles/Home.module.css';
 
 
@@ -22,13 +22,14 @@ import styles from '../styles/Home.module.css';
     const handleSubmit = async () => {
       const response = await fetch('http://localhost:8000/api/create-transaction', {
         method: 'POST',
+        credentials:'include',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           to : address,
           gasPrice: gasPrice || `${defaultGasPrice}`, // Replace 'defaultGasPrice' with an actual default value if necessary
-          amount,
+          amount : amount,
           data: data || `${defaultData}`, // Replace 'defaultData' with an actual default value if necessary
           gasLimit : 1,
           blockHash : "your_block_hash"
