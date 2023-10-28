@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import styles from "../styles/StakePopup.module.css"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function StakePopup({ onClose }) {
   const [amount, setAmount] = useState("");

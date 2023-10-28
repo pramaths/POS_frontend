@@ -51,4 +51,79 @@
   .submitButton:hover {
     background-color: #2980b9; /* A darker shade of blue when hovered */
   }
-  
+  .popupcontainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popupcontent {
+    width: 80%;
+    max-width: 500px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* This will stack elements vertically */
+    gap: 15px; /* Space between elements */
+}
+
+.closeButton {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    align-self: flex-end; /* Position the button on the top-right corner */
+    cursor: pointer;
+    outline: none;
+    margin: -10px -10px 15px auto; /* This will give the button a little negative offset to position it properly */
+}
+
+/* Each form field is wrapped in a div for better layout control */
+.popupcontent > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.inputField {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9; /* Light grayish background for better visibility */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.inputField:focus {
+    outline: none;
+    background-color: #fff; /* White background on focus */
+    box-shadow: 0 0 3px #aaa; /* Slight shadow for a "lifted" effect on focus */
+}
+
+.submitButton {
+    padding: 10px 20px;
+    background-color: #3498db;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.submitButton:hover {
+    background-color: #2980b9;
+}
