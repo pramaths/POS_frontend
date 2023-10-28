@@ -1,14 +1,6 @@
 import React, { useRef } from 'react';
 import styles from '../styles/Home.module.css';
 
-const TransactionPopup = ({ onClose }) => {
-  const popupContentRef = useRef(null);
-
-  const handleContainerClick = (event) => {
-    if (!popupContentRef.current.contains(event.target)) {
-      onClose();
-    }
-  };
 
   const TransactionPopup = ({ onClose }) => {
     const popupContentRef = useRef(null);
@@ -71,9 +63,5 @@ const TransactionPopup = ({ onClose }) => {
     );
   
     
-  }
-
-  
-};
-
+  };
 export default TransactionPopup;
