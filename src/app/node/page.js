@@ -141,7 +141,7 @@ console.log("hey bro",blocks)
                   <React.Fragment key={block._id}>
                     <div
                       ref={index === blocks.length - 1 ? latestBlockRef : null}
-                      className={`${styles.block} ${block.validator === cookieAddress ? styles.shiningBorder : ''}`}
+                      className={`${styles.block} ${block.validator === loggedInUserAddress ? styles.shiningBorder : ''}`}
                     >
                       <p>Block Index: {block.index}</p>
                       <p>Validator: {block.validator?.address}</p>
