@@ -5,7 +5,10 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css"
 import Header from "@/components/Header";
 import HeroSection from "@/components/Herosection";
-import SearchComp from "@/components/SearchResults"
+import SearchComp from "@/components/SearchResults";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function Home() {
   return (
     <>
@@ -16,6 +19,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className={styles.main}>
+      <ToastContainer />
         <Header />
         <SearchComp />
         <HeroSection />
