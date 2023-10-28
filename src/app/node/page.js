@@ -45,7 +45,7 @@ const Node = () => {
         setIsLoading(false);
 
         if (!data.message) {
-          setBlocks(data[0].BlockchainState.chain[0].chain);
+          setBlocks(data[0].BlockchainState.chain);
           // console.log(data[0].BlockchainState.chain);
         }
       })

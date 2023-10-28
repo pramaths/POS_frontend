@@ -1,5 +1,4 @@
-
-import React,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import moment from "moment";
@@ -22,55 +21,55 @@ export default function HeroSection() {
   const [totalTransactions, setTotalTransactions] = useState(0);
   const [latestBlock, setLatestBlock] = useState("");
 
-
   const handleStakeConfirm = () => {
-    const amountToStake = stakeAmount || "1"; 
-    setShowStakePopup(false); 
+    const amountToStake = stakeAmount || "1";
+    setShowStakePopup(false);
   };
   const handleTransactionsConfirm = () => {
-    const recipient = recipientAddress || "Put reciever address";  
-    const data = transactionData || "0X0";  
-    setShowTransactionsPopup(false); 
+    const recipient = recipientAddress || "Put reciever address";
+    const data = transactionData || "0X0";
+    setShowTransactionsPopup(false);
   };
   useEffect(() => {
     const getEthPrice = async () => {
-      const response = await axios.get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=HVHTPWF3UJ8P5ZEDNUZYMT28ZZNEEURRD4`, {});
+      const response = await axios.get(
+        `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=HVHTPWF3UJ8P5ZEDNUZYMT28ZZNEEURRD4`,
+        {}
+      );
       setEthPrice(response.data.result.ethusd);
     };
     const latesttransaction = async () => {
       try {
-        const responsetransaction = await axios.get(`http://localhost:8000/api/get/transactions`, { withCredentials: true });
-        console.log("hello buddyy",responsetransaction.data); 
+        const responsetransaction = await axios.get(
+          `http://localhost:8000/api/get/transactions`,
+          { withCredentials: true }
+        );
+        console.log("hello buddyy", responsetransaction.data);
         if (responsetransaction.data && responsetransaction.data.transactions) {
           const sortedTransactions = responsetransaction.data.transactions
-            .filter(txn => txn.createdAt)
+            .filter((txn) => txn.createdAt)
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-          setTotalTransactions(responsetransaction.data.transactions.length)
+          setTotalTransactions(responsetransaction.data.transactions.length);
           setTransactionsResult(sortedTransactions.slice(0, 5));
         }
       } catch (error) {
         console.error("Error fetching transactions:", error);
       }
-    }
-    
+    };
+
     const getBlockInfo = async () => {
       const responseblocks = await axios.get(
-        `http://localhost:8000/api/get/blocks`, { withCredentials: true }
+        `http://localhost:8000/api/get/blocks`,
+        { withCredentials: true }
       );
-     
-      console.log("rrr", responseblocks.data);
-      const blockArray = [
-        responseblocks.data.blocksdata[5],
-        responseblocks.data.blocksdata[5],
-        responseblocks.data.blocksdata[5],
-        responseblocks.data.blocksdata[5],
-        responseblocks.data.blocksdata[5],
-      ];
 
+      console.log("rrr", responseblocks.data);
+      const blocksData = responseblocks.data.blocksdata;
+      const lastFiveBlocks = blocksData.slice(-5).reverse();
       setLatestBlock(responseblocks.data.latestBlock);
-      setBlockResult(blockArray);
+      setBlockResult(lastFiveBlocks);
+
       // setTransactionsResult(responseblocks.data.blocksdata[0].transactions);
-   
     };
 
     getEthPrice();
@@ -170,8 +169,13 @@ export default function HeroSection() {
             <section>
               <section className={styles.hero_averageValue}>
                 <p>Average Transaction Value</p>
-                <Image src={Chart} alt="Chart" className={styles.chart}
-                width={10} height={10} />
+                <Image
+                  src={Chart}
+                  alt="Chart"
+                  className={styles.chart}
+                  width={10}
+                  height={10}
+                />
               </section>
             </section>
           </section>
@@ -206,15 +210,15 @@ export default function HeroSection() {
                           <section>
                             Fee Recipient{" "}
                             <span className={styles.blueText}>
-  {block.validator ? (
-    <React.Fragment>
-      {block.validator.address.slice(0, 6)}...
-      {block.validator.address.slice(36)}
-    </React.Fragment>
-  ) : (
-    "N/A" 
-  )}
-</span>
+                              {block.validator ? (
+                                <React.Fragment>
+                                  {block.validator.address.slice(0, 6)}...
+                                  {block.validator.address.slice(36)}
+                                </React.Fragment>
+                              ) : (
+                                "N/A"
+                              )}
+                            </span>
                           </section>
                           <section>
                             <span className={styles.blueText}>
@@ -222,7 +226,9 @@ export default function HeroSection() {
                             </span>
                           </section>
                         </td>
-                        <td className={styles.tdValue}>{block.validator.rewardAmount} Eth</td>
+                        <td className={styles.tdValue}>
+                          {block.validator.rewardAmount} Eth
+                        </td>
                       </tr>
                     );
                   })}
@@ -278,7 +284,7 @@ export default function HeroSection() {
                           </section>
                         </td>
                         <td className={styles.tdValue}>
-                          {(Number(txn.amount)).toFixed(2)} Eth
+                          {Number(txn.amount).toFixed(2)} Eth
                         </td>
                       </tr>
                     );
