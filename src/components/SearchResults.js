@@ -70,9 +70,9 @@ console.log(result)
             <span className={styles.claim}>Claim Them Now!</span>
           </section> */}
         </section>
-        <section >
-          <section>
-            <img src="/svg/logo-black.svg" alt="Ethereum Logo" height={150} width={300} />
+        <section className={styles.imagecontainer} >
+          <section className={styles.marginContainer} > 
+            <img src="/svg/logo-no-background.svg" alt="Ethereum Logo" height={150} width={200} />
             {/* <Illustration logo="wizard" className={styles.wizard} /> */}
           </section>
         </section>

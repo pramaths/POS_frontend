@@ -484,3 +484,10 @@
   font-size: 20px;
   cursor: pointer;
 }
+.marginContainer {
+  margin: 20px; /* Adjust this value as needed */
+}
+
+.imagecontainer{
+  margin-bottom: 5rem;
+}

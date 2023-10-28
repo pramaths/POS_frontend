@@ -227,3 +227,6 @@
     transform: rotate(0deg);
   }
 }
+.marginContainer {
+  margin: 20px; /* Adjust this value as needed */
+}

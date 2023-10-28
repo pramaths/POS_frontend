@@ -12,7 +12,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Chart = "/assets/chart.png";
-
 export default function HeroSection() {
   const [showResult, setShowResult] = useState(true);
   const [blockResult, setBlockResult] = useState([]);
