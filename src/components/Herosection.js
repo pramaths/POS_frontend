@@ -227,7 +227,7 @@ export default function HeroSection() {
                           </section>
                         </td>
                         <td className={styles.tdValue}>
-                          {block.validator.rewardAmount} Eth
+                          {block.validator.rewardAmount.toFixed(2)} Eth
                         </td>
                       </tr>
                     );
