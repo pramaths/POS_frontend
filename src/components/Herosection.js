@@ -208,7 +208,7 @@ const currentDate = new Date();
                           </section>
                           <section>
                             {
-                             ((new Date() - new Date(block.createdDate)) / 3600000).toFixed(2) + " hours ago"
+                             moment(block.createdDate).fromNow()
                             }
                           </section>
                         </td>
@@ -267,7 +267,7 @@ const currentDate = new Date();
                           </section>
                           <section>
                             {
-                              ((new Date() - new Date(txn.createdAt)) / 3600000).toFixed(2) + " hours ago"
+                              moment(txn.createdAt).fromNow()
                             }
                           </section>
                         </td>

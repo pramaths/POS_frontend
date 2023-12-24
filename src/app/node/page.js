@@ -101,7 +101,7 @@ console.log("hey bro",blocks)
       socket.disconnect();
     };
 
-  }, []);
+  }, [blocks]);
 
 
   const [cookieAddress, setCookieAddress] = useState('');
