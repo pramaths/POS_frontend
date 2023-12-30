@@ -1,0 +1,26 @@
+.transactions{
+  margin: 5rem;
+  margin-top: 1rem;
+}
+.transaction-header{
+    margin-bottom: 1rem;
+    font-size: larger;
+}
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: wheat;
+}
+.tr-br{
+    border: white;
+}
+
+.transactions-table th, .transactions-table td {
+    border: 1px solid rgb(12, 12, 12);
+    padding: 8px;
+    text-align: left;
+}
+
+.transactions-table th {
+    background-color: #171616;
+}
