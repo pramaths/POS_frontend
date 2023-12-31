@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 const AccountDetails = () => {
     const [transactions, setTransactions] = useState([]);
-    const [AccountDetails,setaccountDetails]=useState([]);s
+    const [AccountDetails,setaccountDetails]=useState([]);
     const { walletaddress } = useParams(); 
 
     useEffect(() => {
