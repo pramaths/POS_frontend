@@ -14,76 +14,33 @@
   
   .popupcontent {
     width: 80%;
+    position: relative;
     max-width: 500px; /* Set maximum width for the popup */
-    background-color: #ffffff; /* White background for the popup content */
+    background-color: #333; /* black background for the popup content */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect for popup */
   }
-  
-  .closeButton {
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    float: right; /* Position the button on the top-right corner */
-    cursor: pointer; /* Make the button look clickable */
-    outline: none; /* Remove browser default outline */
-  }
-  
-  .inputField {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .submitButton {
-    padding: 10px 20px;
-    background-color: #3498db; /* A blue shade */
-    border: none;
-    border-radius: 4px;
-    color: white; /* White text color */
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
+
   .submitButton:hover {
     background-color: #2980b9; /* A darker shade of blue when hovered */
   }
-  .popupcontainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.popupcontent {
-    width: 80%;
-    max-width: 500px;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column; /* This will stack elements vertically */
-    gap: 15px; /* Space between elements */
-}
+  
 
 .closeButton {
     background-color: transparent;
+    position: absolute;
+    top: 20px;
+    right: 25px;
     border: none;
     font-size: 20px;
-    align-self: flex-end; /* Position the button on the top-right corner */
     cursor: pointer;
     outline: none;
-    margin: -10px -10px 15px auto; /* This will give the button a little negative offset to position it properly */
+    margin: -10px -10px 15px auto; /*This will give the button a little negative offset to position it properly*/
+}
+
+.closeButton:hover {
+    color: #007bff; /* A darker shade of blue when hovered */
 }
 
 /* Each form field is wrapped in a div for better layout control */
@@ -95,7 +52,7 @@
 
 label {
     font-weight: bold;
-    color: #333;
+    color: white;
     margin-bottom: 5px;
 }
 
@@ -116,7 +73,7 @@ label {
 
 .submitButton {
     padding: 10px 20px;
-    background-color: #3498db;
+    background-color: #007bff;
     border: none;
     border-radius: 4px;
     color: white;

@@ -61,16 +61,20 @@ function StakePopup({ onClose }) {
          
         <button onClick={onClose} className={styles.closeButton}>X</button>
         <h3>Stake ETH</h3>
+        <br />
         <p>Enter the amount you wish to stake:</p>
-       
+        
         <input 
-          type="number" 
+          type="text" 
           value={amount} 
           onChange={e => setAmount(e.target.value)}
           placeholder="Amount in ETH" 
           className={styles.input}
         />
-        <button onClick={handleStake} className={styles.confirmButton}>Confirm</button>
+        <div className="buttonDiv">
+          <button onClick={handleStake} className={styles.confirmButton}>Confirm</button>
+        </div>
+        
       </div>
     </div>
   );

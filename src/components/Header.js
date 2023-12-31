@@ -1,4 +1,4 @@
-import React,{ useEffect, useState,useRef  } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
@@ -8,6 +8,7 @@ const Logo = "/assets/blockrolllogo.png";
 import StakePopup from './Stakepopup';
 import TransactionPopup from './TransactionPopup';
 import { useHistory } from 'react-router-dom';
+import { IoIosArrowDown } from "react-icons/io";
 
 export default function Header() {
   const [ethPrice, setEthPrice] = useState("");
@@ -16,39 +17,61 @@ export default function Header() {
   const [showStakePopup, setShowStakePopup] = useState(false);
   const [showTransactionPopup, setShowTransactionPopup] = useState(false);
   const walletPopupRef = useRef(null);
-  const router = useRouter();  
+
+  // Dropdown states and stuff
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsOpen(false);
+  };
+
+  // dropdown states and stuff over
+
+  const router = useRouter();
   const handleStakeClick = () => {
     setShowStakePopup(true);
-};
-const handleOutsideClick = (event) => {
-  if (walletPopupRef.current && !walletPopupRef.current.contains(event.target)) {
-    setShowPopup(false);
-  }
-};const navigateToBlockchainPage = () => {
-  router.push('/blockchain'); // navigating to the blockchain page
-};
-
-const navigateToHomePage = () => {
-  router.push('/');
-};
-
-const navigateToNodePage = () => {
-  router.push('/node'); // navigating to the node page
-};
-useEffect(() => {
-
-  
-  document.addEventListener("mousedown", handleOutsideClick);
-  return () => {
-    document.removeEventListener("mousedown", handleOutsideClick);
   };
-}, []);
+  const handleOutsideClick = (event) => {
+    if (walletPopupRef.current && !walletPopupRef.current.contains(event.target)) {
+      setShowPopup(false);
+    }
+  };
+  const navigateToBlockchainPage = () => {
+    router.push('/blockchain'); // navigating to the blockchain page
+  };
+
+  const navigateToTransactionsPage = () => {
+    router.push('/Transactions'); // navigating to the transactions page
+  };
+
+  const navigateToHomePage = () => {
+    router.push('/');
+  };
+
+  const navigateToNodePage = () => {
+    router.push('/node'); // navigating to the node page
+  };
+
+  const showDropMenu = (e) => {
+    e.classList.add("")
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   useEffect(() => {
     const createdAddress = Cookie.get("walletaddress");
-    const publicKey=Cookie.get("publicKey")
-    console.log("pubkey",publicKey)
-    console.log("cookieaddress",createdAddress)
+    const publicKey = Cookie.get("publicKey")
+    console.log("pubkey", publicKey)
+    console.log("cookieaddress", createdAddress)
     if (createdAddress) {
       fetchAccountData();
     }
@@ -72,8 +95,8 @@ useEffect(() => {
 
       const response = await axios.post("http://localhost:8000/api/wallet/generatekeys", { withCredentials: true });
       console.log(response.data)
-      Cookie.set("walletaddress",response.data.address)
-      Cookie.set("publicKey",response.data.publicKey)
+      Cookie.set("walletaddress", response.data.address)
+      Cookie.set("publicKey", response.data.publicKey)
       setAccountData(response.data);
       togglePopup();
     } catch (error) {
@@ -87,7 +110,7 @@ useEffect(() => {
       setEthPrice(response.data.result.ethusd);
     };
     getEthPrice();
-  },[]);
+  }, []);
 
   return (
     <section className={styles.header}>
@@ -98,31 +121,41 @@ useEffect(() => {
       <section className={styles.navbar}>
         {/* <Image src="/svg/logo-white.svg" alt="Etherscan Logo" className={styles.logo} width={10} height={5} />
          */}
-         Block & Roll
+        Block & Roll
         <section className={styles.menu}>
           <p onClick={navigateToHomePage}>Home</p>
-          <p onClick={navigateToBlockchainPage}>
+          {/* <p onClick={navigateToBlockchainPage}>
   Blockchain
-</p>
+</p> */}
+          <div class={styles.dropdown} onBlur={closeDropdown} tabIndex="0">
+            <div class={styles.dropdownBtn} onClick={toggleDropdown}>Blockchain <span className={styles.icon}><IoIosArrowDown /></span></div>
+            {isOpen && (
+              <div class={styles.dropdownContent}>
+                <a onClick={navigateToBlockchainPage}>Blockchain</a>
+                <a onClick={navigateToTransactionsPage}>Transactions</a>
+              </div>
+            )}
 
-<p onClick={navigateToNodePage}>
-  Node
-</p>
+          </div>
+
+          <p onClick={navigateToNodePage}>
+            Node
+          </p>
 
           <p onClick={() => setShowTransactionPopup(true)}>
-  Start Transaction
-</p>
+            Start Transaction
+          </p>
           <p onClick={handleStakeClick}>
-    Stake ETH
-</p>
-          
+            Stake ETH
+          </p>
+
           <p onClick={togglePopup}>
             Wallet
           </p>
           <p>|</p>
           {accountData ? (
             <p className={styles.signIn} onClick={togglePopup}>
-              {accountData.address.slice(0,8)}...{accountData.address.slice(36,42)}
+              {accountData.address.slice(0, 8)}...{accountData.address.slice(36, 42)}
             </p>
           ) : (
             <p className={styles.signIn} onClick={handleCreateAccount}>
@@ -132,33 +165,33 @@ useEffect(() => {
         </section>
       </section>
       {showPopup && (
- <div className={styles.popupcontainer} onClick={handleOutsideClick}>
- <div className={styles.popupcontent} ref={walletPopupRef}>
-      {accountData ? (
-        <div>
-          <button onClick={togglePopup} className={styles.closeButton}>
-        X
-      </button>
-          <p>Public Key: {accountData.publicKey}</p>
-          <p>privateKey Key: {accountData.privateKey}</p>
-          <p>Address: {accountData.address}</p>
-          <p>Balance: {accountData.balance} ETH</p>
-          <p>stakedETH: {accountData.stakedEth} ETH</p>
-          <button>Stake</button>
-          <button>Transactions</button>
-        </div>
-      ) : (
-        <div>
-          <p>Public Key: {accountData.publicKey}</p>
-          <p>Address: {accountData.address}</p>
-          <p>Balance: {accountData.balance} ETH</p>
+        <div className={styles.popupcontainer} onClick={handleOutsideClick}>
+          <div className={styles.popupcontent} ref={walletPopupRef}>
+            {accountData ? (
+              <div>
+                <button onClick={togglePopup} className={styles.closeButton}>
+                  X
+                </button>
+                <p>Public Key: {accountData.publicKey}</p>
+                <p>privateKey Key: {accountData.privateKey}</p>
+                <p>Address: {accountData.address}</p>
+                <p>Balance: {accountData.balance} ETH</p>
+                <p>stakedETH: {accountData.stakedEth} ETH</p>
+                <button>Stake</button>
+                <button>Transactions</button>
+              </div>
+            ) : (
+              <div>
+                <p>Public Key: {accountData.publicKey}</p>
+                <p>Address: {accountData.address}</p>
+                <p>Balance: {accountData.balance} ETH</p>
+              </div>
+            )}
+          </div>
         </div>
       )}
-    </div>
-  </div>
-)}
-{showStakePopup && <StakePopup onClose={() => setShowStakePopup(false)} />}
-{showTransactionPopup && <TransactionPopup onClose={() => setShowTransactionPopup(false)} />}
+      {showStakePopup && <StakePopup onClose={() => setShowStakePopup(false)} />}
+      {showTransactionPopup && <TransactionPopup onClose={() => setShowTransactionPopup(false)} />}
 
     </section>
   );
