@@ -1,5 +1,5 @@
 import React, { useState ,useRef } from 'react';
-import styles from '../styles/Home.module.css';
+import '../styles/TransactionPopup.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -43,21 +43,27 @@ import 'react-toastify/dist/ReactToastify.css';
     };
 
     return (
-      <div className={styles.popupcontainer} onClick={handleContainerClick}>
-        <div className={styles.popupcontent} ref={popupContentRef}>
-          <button onClick={onClose} className={styles.closeButton}>
+      <div className="popupcontainer" onClick={handleContainerClick}>
+        <div className="popupcontent" ref={popupContentRef}>
+          <button onClick={onClose} className="closeButton">
             X
           </button>
           <div>
+            <br />
             <label>Address:</label>
-            <input type="text" placeholder="Enter Address" className={styles.inputField} onChange={(e)=>{setAddress(e.target.value)}} />
+            <input type="text" placeholder="Enter Address" className="inputField" onChange={(e)=>{setAddress(e.target.value)}} />
+            <br />
             <label>Gas Price:</label>
-            <input type="text" placeholder="Enter Gas Price" className={styles.inputField} onChange={(e)=>{setGasPrice(e.target.value)}} />
+            <input type="text" placeholder="Enter Gas Price" className="inputField" onChange={(e)=>{setGasPrice(e.target.value)}} />
+            <br />
             <label>Amount:</label>
-            <input type="text" placeholder="Enter Amount" className={styles.inputField} onChange={(e)=>{setAmount(e.target.value)}} />
+            <input type="text" placeholder="Enter Amount" className="inputField" onChange={(e)=>{setAmount(e.target.value)}} />
+            <br />
             <label>Data:</label>
-            <input type="text" placeholder="Enter Data" className={styles.inputField} onChange={(e)=>{setData(e.target.value)}} />
-            <button className={styles.submitButton} onClick={handleSubmit}>Submit Transaction</button>
+            <input type="text" placeholder="Enter Data" className="inputField" onChange={(e)=>{setData(e.target.value)}} />
+            <br /><br />
+            <button className="submitButton" onClick={handleSubmit}>Submit Transaction</button>
+            <br />
           </div>
         </div>
       </div>
