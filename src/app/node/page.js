@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const serverUrl = 'http://localhost:8000';
+const serverUrl = 'https://proof-of-stake.onrender.com';
 
 const loggedInUserAddress = Cookies.get('walletaddress');
 
@@ -27,7 +27,7 @@ const Node = () => {
   }, [blocks]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/get/validator', {
+    fetch('https://proof-of-stake.onrender.com/api/get/validator', {
       method: 'GET',
       credentials: 'include',
     })

@@ -83,7 +83,7 @@ export default function Header() {
 
   const fetchAccountData = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/get/account", { withCredentials: true });
+      const response = await axios.get("https://proof-of-stake.onrender.com/api/get/account", { withCredentials: true });
       setAccountData(response.data);
     } catch (error) {
       console.error("Error fetching wallet data:", error);
@@ -93,7 +93,7 @@ export default function Header() {
   const handleCreateAccount = async () => {
     try {
 
-      const response = await axios.post("http://localhost:8000/api/wallet/generatekeys", { withCredentials: true });
+      const response = await axios.post("https://proof-of-stake.onrender.com/api/wallet/generatekeys", { withCredentials: true });
       console.log(response.data)
       Cookie.set("walletaddress", response.data.address)
       Cookie.set("publicKey", response.data.publicKey)
