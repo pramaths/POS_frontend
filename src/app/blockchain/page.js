@@ -5,7 +5,6 @@ import styles from "../../styles/Home.module.css"
 import blockchainStyles from "../../styles/blockchain.module.css";
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
-
 const Blockchain = () => {
   const chainSVGPath = '/chain.svg';
   const [blocks, setBlocks] = useState([]);
@@ -41,11 +40,16 @@ const Blockchain = () => {
                       setSelectedTransaction(null);
                     }}
                   >
+                    <div className={blockchainStyles.blocknumber}>
                     Block {index + 1} <br />
-                    Transactions: {block.transactions.length} <br />
+                    </div>
+                    <div className={blockchainStyles.blockdetails}>
+                      <div>
+                    Transactions: {block.transactions.length} <br /></div>
                     Validator: {block.validator ? block.validator.address : null} <br />
-                    PrevHash:{block.prevHash} <br />
+                    PrevHash:{block.prevHash.slice(0,5)}.....{block.prevHash.slice(block.prevHash.length-5)} <br />
                     Hash:{block.hash}
+                    </div>
                   </div>
 
                   {index !== blocks.length - 1 &&

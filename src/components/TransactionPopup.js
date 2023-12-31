@@ -19,19 +19,6 @@ import 'react-toastify/dist/ReactToastify.css';
         onClose();
       }
     };
-
-    // // Function to display the toast
-    // const displayToast = (nonce) => {
-    //   toast.success(`Created transaction Successfully`, {
-    //     position: 'top-right',
-    //     autoClose: 4000, // 4 seconds
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //   });
-    // };
-
     const handleSubmit = async () => {
       const response = await fetch('http://localhost:8000/api/create-transaction', {
         method: 'POST',
@@ -41,9 +28,9 @@ import 'react-toastify/dist/ReactToastify.css';
         },
         body: JSON.stringify({
           to : address,
-          gasPrice: gasPrice || `${defaultGasPrice}`, // Replace 'defaultGasPrice' with an actual default value if necessary
+          gasPrice: gasPrice || `${defaultGasPrice}`, 
           amount : amount,
-          data: data || `${defaultData}`, // Replace 'defaultData' with an actual default value if necessary
+          data: data || `${defaultData}`,
           gasLimit : 1,
           blockHash : "your_block_hash"
         }),
@@ -52,9 +39,6 @@ import 'react-toastify/dist/ReactToastify.css';
       const responseData = await response.json();
       if(response.status === 200) toast.success('Transaction created successfully');
       console.log(responseData);
-  
-      // Handle the response or perform further actions if needed.
-
       onClose();
     };
 
