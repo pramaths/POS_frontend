@@ -52,16 +52,16 @@ import 'react-toastify/dist/ReactToastify.css';
             <br />
             <label>Address:</label>
             <input type="text" placeholder="Enter Address" className="inputField" onChange={(e)=>{setAddress(e.target.value)}} />
-            <br />
+            {/* <br /> */}
             <label>Gas Price:</label>
             <input type="text" placeholder="Enter Gas Price" className="inputField" onChange={(e)=>{setGasPrice(e.target.value)}} />
-            <br />
+            {/* <br /> */}
             <label>Amount:</label>
             <input type="text" placeholder="Enter Amount" className="inputField" onChange={(e)=>{setAmount(e.target.value)}} />
-            <br />
+            {/* <br /> */}
             <label>Data:</label>
             <input type="text" placeholder="Enter Data" className="inputField" onChange={(e)=>{setData(e.target.value)}} />
-            <br /><br />
+            <br />
             <button className="submitButton" onClick={handleSubmit}>Submit Transaction</button>
             <br />
           </div>

@@ -2,14 +2,20 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; 
 
-const AccountDetails = () => {
+const AccountDetails = ({params}) => {
     const [transactions, setTransactions] = useState([]);
     const [AccountDetails,setaccountDetails]=useState([]);
-    const { walletaddress } = useParams(); 
+    const [walletAddress , setWalletAddress] = useState(''); 
+
+    useEffect(()=>{
+        if(params.id){
+            setWalletAddress(params.id)
+        }
+    },[params.id])
 
     useEffect(() => {
-        if (walletaddress) {
-            fetch(`http://localhost:8000/api/get/address/${walletaddress}`) 
+        if (walletAddress) {
+            fetch(`http://localhost:8000/api/get/address/${walletAddress}`) 
                 .then((response) => response.json())
                 .then((data) => {
                     setTransactions(data.transactions);
@@ -19,12 +25,12 @@ const AccountDetails = () => {
                     console.error('Error fetching data:', error);
                 });
         }
-    }, [address]); 
+    }, [params.id]); 
 
     return (
         <div>
             <h1>Account Details</h1>
-            <p>Address: {walletaddress}</p> 
+            <p>Address: {walletAddress}</p> 
             <table>
                 <thead>
                     <tr>

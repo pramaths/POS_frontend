@@ -16,11 +16,11 @@
     width: 80%;
     position: relative;
     max-width: 500px; /* Set maximum width for the popup */
-    background-color: #333; /* black background for the popup content */
-    max-width: 200px; /* Set maximum width for the popup */
-    background-color: #ffffff; /* White background for the popup content */
+    background-color: black; /* black background for the popup content */
+    max-width: 400px; /* Set maximum width for the popup */
     padding: 20px;
     border-radius: 8px;
+    border: #fff solid 1px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect for popup */
   }
 
@@ -38,6 +38,7 @@
     width: 100%;
     padding: 10px;
     margin: 10px 0;
+    color: black;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
