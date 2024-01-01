@@ -1,0 +1,63 @@
+.accountlayout{
+    margin: 1rem;
+    padding: 2rem;
+
+}
+.accountdetails{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+.acc{
+    margin: 2rem;
+    width: 30%;
+    padding: 1.5rem;
+    border: 0.31rem solid rgb(53, 53, 55);
+    box-shadow: #2b2b2b;
+    border-radius: 1rem;
+}
+
+.accountdetails{
+    margin: 2rem;
+    display: flex;
+justify-content: space-between;
+}
+.acc-table{
+    margin: 4rem;
+    margin-top: 1rem;
+}
+
+.account-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    border: 1px solid #454343; 
+    border-radius: 7rem;
+  }
+  
+  .account-details-table th,
+  .account-details-table td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .account-details-table th {
+    background-color: #2b2b2b; 
+  }
+
+  .account-details-table tr:hover {
+    background-color: #323232;
+  }
+  .account-details-table td {
+    word-break: break-word;
+  }
+  .mined-status {
+    color: green; 
+    font-weight: bold; 
+  }
+  
+  .details-design{
+font-size: large;
+margin-top: 0.5rem;
+  }
