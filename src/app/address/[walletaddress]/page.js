@@ -1,30 +1,36 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; 
+import { useRouter } from 'next/navigation';
 
 const AccountDetails = () => {
     const [transactions, setTransactions] = useState([]);
-    const [AccountDetails,setaccountDetails]=useState([]);
-    const { walletaddress } = useParams(); 
+    const [accountDetails, setAccountDetails] = useState([]);
+    const [walletaddress, setWalletAddress] = useState('');
+    const router = useRouter();
 
     useEffect(() => {
-        if (walletaddress) {
-            fetch(`http://localhost:8000/api/get/address/${walletaddress}`) 
-                .then((response) => response.json())
-                .then((data) => {
-                    setTransactions(data.transactions);
-                    setaccountDetails(data.account)
-                })
-                .catch((error) => {
-                    console.error('Error fetching data:', error);
-                });
+        if (router.isReady) {
+            const { walletaddress: walletaddressParam } = router.query;
+
+            if (walletaddressParam) {
+                fetch(`http://localhost:8000/api/get/address/${walletaddressParam}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        setTransactions(data.transactions);
+                        setAccountDetails(data.account);
+                        setWalletAddress(walletaddressParam);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                    });
+            }
         }
-    }, [address]); 
+    }, [router.isReady, router.query]);
 
     return (
         <div>
             <h1>Account Details</h1>
-            <p>Address: {walletaddress}</p> 
+            <p>Address: {walletaddress}</p>
             <table>
                 <thead>
                     <tr>
