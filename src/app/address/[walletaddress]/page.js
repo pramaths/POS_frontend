@@ -29,8 +29,14 @@ const AccountDetails = () => {
 
     return (
         <div>
+            <div>
             <h1>Account Details</h1>
             <p>Address: {walletaddress}</p>
+            </div>
+
+            <div>
+                
+            </div>
             <table>
                 <thead>
                     <tr>
