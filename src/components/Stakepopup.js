@@ -21,6 +21,7 @@ function StakePopup({ onClose }) {
 
   const handleStake = async() => {
     const response = await fetch('https://proof-of-stake.onrender.com/api/account/stake', {
+  
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -32,7 +33,6 @@ function StakePopup({ onClose }) {
     if (response.status === 200) {
       console.log('Staked succesfully.');
       toast.success('Staked succesfully.');
-      onClose();
     } else {
       console.error('Error Staking');
       toast.error('Error in Staking');
