@@ -20,7 +20,7 @@ const AccountDetails = ({params}) => {
 
     useEffect(() => {
         if (walletAddress) {
-            fetch("http://localhost:8000/api/get/address/0x4fb3d621b81bd651f6c922c0ee075459e2518512") 
+            fetch("https://proof-of-stake.onrender.com/api/get/address/0x4fb3d621b81bd651f6c922c0ee075459e2518512") 
                 .then(response => response.json())
                 .then(data => {
                     setTransactions(data.transactions);

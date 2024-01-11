@@ -12,7 +12,7 @@ const Blockchain = () => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/get/blocks")
+    fetch("https://proof-of-stake.onrender.com/api/get/blocks")
       .then(response => response.json())
       .then(data => setBlocks(data.blocksdata))
       .catch(err => console.error('Error fetching blocks:', err));
