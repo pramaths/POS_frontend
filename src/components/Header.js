@@ -207,11 +207,11 @@ export default function Header() {
                 <button onClick={togglePopup} className={styles.closeButton}>
                   X
                 </button>
-                <p><span className={styles.spanHeaders}>Public Key&nbsp;&nbsp;&nbsp;&nbsp;: </span>{accountData.publicKey.slice(0, 8)}...{accountData.publicKey.slice(122, 130)} <span className={styles.copyIcon} onClick={handleCopyPublic}><MdContentCopy /></span></p>
+                <p><span className={styles.spanHeaders}>Public Key&nbsp;&nbsp;&nbsp;&nbsp;: </span>{accountData.publicKey?.slice(0, 8)}...{accountData.publicKey?.slice(122, 130)} <span className={styles.copyIcon} onClick={handleCopyPublic}><MdContentCopy /></span></p>
                 <br/>
-                <p><span className={styles.spanHeaders}>Private Key&nbsp;&nbsp;: </span>{accountData.privateKey.slice(0, 8)}...{accountData.privateKey.slice(58, 66)} <span className={styles.copyIcon} onClick={handleCopyPrivate}><MdContentCopy /></span></p>
+                <p><span className={styles.spanHeaders}>Private Key&nbsp;&nbsp;: </span>{accountData.privateKey?.slice(0, 8)}...{accountData.privateKey?.slice(58, 66)} <span className={styles.copyIcon} onClick={handleCopyPrivate}><MdContentCopy /></span></p>
                 <br/>
-                <p><span className={styles.spanHeaders}>Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>{accountData.address.slice(0, 8)}...{accountData.address.slice(34, 42)} <span className={styles.copyIcon} onClick={handleCopyAddress}><MdContentCopy /></span></p>
+                <p><span className={styles.spanHeaders}>Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>{accountData.address?.slice(0, 8)}...{accountData.address?.slice(34, 42)} <span className={styles.copyIcon} onClick={handleCopyAddress}><MdContentCopy /></span></p>
                 <br/>
                 <p><span className={styles.spanHeaders}>Balance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>{accountData.balance} ETH</p>
                 <br/>
