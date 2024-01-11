@@ -49,7 +49,7 @@ export default function HeroSection() {
             .filter((txn) => txn.createdAt)
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
           setTotalTransactions(responsetransaction.data.transactions.length);
-          setTransactionsResult(sortedTransactions.slice(0, 5));
+          setTransactionsResult(sortedTransactions?.slice(0, 5));
         }
       } catch (error) {
         console.error("Error fetching transactions:", error);
@@ -64,17 +64,14 @@ export default function HeroSection() {
 
       console.log("rrr", responseblocks.data);
       const blocksData = responseblocks.data.blocksdata;
-      const lastFiveBlocks = blocksData.slice(-5).reverse();
+      const lastFiveBlocks = blocksData?.slice(-5).reverse();
       setLatestBlock(responseblocks.data.latestBlock);
       setBlockResult(lastFiveBlocks);
-
-      // setTransactionsResult(responseblocks.data.blocksdata[0].transactions);
     };
 
     getEthPrice();
     getBlockInfo();
     latesttransaction();
-    // latesttransaction();
   }, []);
 
 // Get the current date and time
@@ -218,8 +215,8 @@ const currentDate = new Date();
                             <span className={styles.blueText}>
                               {block.validator ? (
                                 <React.Fragment>
-                                  {block.validator.address.slice(0, 6)}...
-                                  {block.validator.address.slice(36)}
+                                  {block.validator.address?.slice(0, 6)}...
+                                  {block.validator.address?.slice(36)}
                                 </React.Fragment>
                               ) : (
                                 "N/A"

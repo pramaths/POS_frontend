@@ -20,8 +20,6 @@ function StakePopup({ onClose }) {
   };
 
   const handleStake = async() => {
-    // Handle the staking logic here
-    // Send the data to the server
     const response = await fetch('https://proof-of-stake.onrender.com/api/account/stake', {
       method: 'POST',
       credentials: 'include',
@@ -35,11 +33,9 @@ function StakePopup({ onClose }) {
       console.log('Staked succesfully.');
       toast.success('Staked succesfully.');
       onClose();
-      // Handle any further actions on success.
     } else {
       console.error('Error Staking');
       toast.error('Error in Staking');
-      // Handle errors.
     }
 
     console.log("Staking amount:", amount);
@@ -47,7 +43,6 @@ function StakePopup({ onClose }) {
   };
 
   const handleOverlayClick = (event) => {
-    // If the clicked element is directly the overlay and not a descendant of the content
     if (!contentRef.current.contains(event.target)) {
       onClose();
     }

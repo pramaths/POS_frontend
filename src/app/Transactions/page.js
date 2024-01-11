@@ -44,12 +44,12 @@ console.log(transactions)
             <tbody>
                 {transactions.map((transaction) => (
                     <tr key={transaction.id}>
-                        <td>0x{transaction.txHash.slice(0,8)}....</td>
+                        <td>0x{transaction.txHash?.slice(0,8)}....</td>
                         <td>{transaction.method}</td>
-                        <td>0x{transaction.blockHash.slice(0,5)}</td>
+                        <td>0x{transaction.blockHash?.slice(0,5)}</td>
                         <td>{moment(transaction.createdAt).fromNow()}</td>
-                        <td>{transaction.sender.slice(0,10)}...</td>
-                        <td>{transaction.recipient.slice(0,10)}...</td>
+                        <td>{transaction.sender?.slice(0,10)}...</td>
+                        <td>{transaction.recipient?.slice(0,10)}...</td>
                         <td>{transaction.amount}{" "}ETH</td>
                         <td>{transaction.gasPrice}Gwei</td>
                     </tr>

@@ -116,9 +116,9 @@ console.log("kkkkkkkk",accountDetails)
             <tbody>
   {transactions.map((transaction, index) => (
     <tr key={index}>
-      <td>0x{transaction.txHash.slice(0,20)}...</td>
-      <td>{transaction.sender.slice(0,15)}...</td>
-      <td>{transaction.recipient.slice(0,15)}...</td>
+      <td>0x{transaction.txHash?.slice(0,20)}...</td>
+      <td>{transaction.sender?.slice(0,15)}...</td>
+      <td>{transaction.recipient?.slice(0,15)}...</td>
       <td>{transaction.method}</td>
       <td>{transaction.amount} ETH</td>
       <td>{moment(transaction.createdAt).fromNow()}</td>

@@ -155,7 +155,7 @@ export default function Header() {
           <p>|</p>
           {accountData ? (
             <p className={styles.signIn} onClick={togglePopup}>
-              {accountData.address.slice(0, 8)}...{accountData.address.slice(36, 42)}
+              {accountData.address?.slice(0, 8)}...{accountData.address?.slice(36, 42)}
             </p>
           ) : (
             <p className={styles.signIn} onClick={handleCreateAccount}>
