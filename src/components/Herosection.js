@@ -40,7 +40,7 @@ export default function HeroSection() {
     const latesttransaction = async () => {
       try {
         const responsetransaction = await axios.get(
-          `http://localhost:8000/api/get/transactions`,
+          `https://proof-of-stake.onrender.com/api/get/transactions`,
           { withCredentials: true }
         );
         console.log("hello buddyy", responsetransaction.data);
@@ -58,7 +58,7 @@ export default function HeroSection() {
 
     const getBlockInfo = async () => {
       const responseblocks = await axios.get(
-        `http://localhost:8000/api/get/blocks`,
+        `https://proof-of-stake.onrender.com/api/get/blocks`,
         { withCredentials: true }
       );
 

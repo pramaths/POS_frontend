@@ -20,7 +20,7 @@ import 'react-toastify/dist/ReactToastify.css';
       }
     };
     const handleSubmit = async () => {
-      const response = await fetch('http://localhost:8000/api/create-transaction', {
+      const response = await fetch('https://proof-of-stake.onrender.com/api/create-transaction', {
         method: 'POST',
         credentials:'include',
         headers: {
