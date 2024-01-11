@@ -33,12 +33,9 @@ function StakePopup({ onClose }) {
     if (response.status === 200) {
       console.log('Staked succesfully.');
       toast.success('Staked succesfully.');
-      
-      // Handle any further actions on success.
     } else {
       console.error('Error Staking');
       toast.error('Error in Staking');
-      // Handle errors.
     }
 
     console.log("Staking amount:", amount);
@@ -46,7 +43,6 @@ function StakePopup({ onClose }) {
   };
 
   const handleOverlayClick = (event) => {
-    // If the clicked element is directly the overlay and not a descendant of the content
     if (!contentRef.current.contains(event.target)) {
       onClose();
     }

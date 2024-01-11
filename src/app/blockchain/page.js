@@ -47,7 +47,7 @@ const Blockchain = () => {
                       <div>
                     Transactions: {block.transactions.length} <br /></div>
                     Validator: {block.validator ? block.validator.address : null} <br />
-                    PrevHash:{block.prevHash.slice(0,5)}.....{block.prevHash.slice(block.prevHash.length-5)} <br />
+                    PrevHash:{block.prevHash?.slice(0,5)}.....{block.prevHash?.slice(block.prevHash.length-5)} <br />
                     Hash:{block.hash}
                     </div>
                   </div>
