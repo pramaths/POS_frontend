@@ -21,9 +21,7 @@ function StakePopup({ onClose }) {
 
   const handleStake = async() => {
     const response = await fetch('https://proof-of-stake.onrender.com/api/account/stake', {
-    onClose();
-
-    const response = await fetch('http://localhost:8000/api/account/stake', {
+  
       method: 'POST',
       credentials: 'include',
       headers: {
