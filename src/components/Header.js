@@ -9,6 +9,8 @@ import StakePopup from './Stakepopup';
 import TransactionPopup from './TransactionPopup';
 import { useHistory } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
+import { MdContentCopy } from "react-icons/md";
+import copy from 'clipboard-copy';
 
 export default function Header() {
   const [ethPrice, setEthPrice] = useState("");
@@ -17,6 +19,34 @@ export default function Header() {
   const [showStakePopup, setShowStakePopup] = useState(false);
   const [showTransactionPopup, setShowTransactionPopup] = useState(false);
   const walletPopupRef = useRef(null);
+
+  
+
+  const handleCopyPublic = () => {
+    if (accountData.publicKey) {
+      copy(accountData.publicKey);
+      alert('publicKey copied to clipboard!');
+    }
+  };
+
+  const handleCopyPrivate = () => {
+    if (accountData.privateKey) {
+      copy(accountData.privateKey);
+      alert('privateKey copied to clipboard!');
+    }
+  };
+
+  const handleCopyAddress = () => {
+    if (accountData.address) {
+      copy(accountData.address);
+      alert('Wallet Address copied to clipboard!');
+    }
+  };
+
+  // console.log(accountData?.publicKey.length,accountData?.privateKey.length,accountData?.address.length)
+  // publicKey = 130
+  // privateKey = 66
+  // address = 42
 
   // Dropdown states and stuff
   const [isOpen, setIsOpen] = useState(false);
@@ -27,12 +57,17 @@ export default function Header() {
 
   const closeDropdown = () => {
     setIsOpen(false);
-  };
+  }
 
-  // dropdown states and stuff over
+  // Dropdown states stuff over
 
   const router = useRouter();
+
   const handleStakeClick = () => {
+    if(!Cookie.get("walletaddress")){
+      alert("Please create an account first");
+      return;
+    }
     setShowStakePopup(true);
   };
   const handleOutsideClick = (event) => {
@@ -56,10 +91,6 @@ export default function Header() {
     router.push('/node'); // navigating to the node page
   };
 
-  const showDropMenu = (e) => {
-    e.classList.add("")
-  };
-
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
@@ -78,6 +109,10 @@ export default function Header() {
   }, []);
 
   const togglePopup = () => {
+    if(!Cookie.get("walletaddress")){
+      alert("Please create an account first");
+      return;
+    }
     setShowPopup(!showPopup);
   };
 
@@ -127,10 +162,10 @@ export default function Header() {
           {/* <p onClick={navigateToBlockchainPage}>
   Blockchain
 </p> */}
-          <div class={styles.dropdown} onBlur={closeDropdown} tabIndex="0">
-            <div class={styles.dropdownBtn} onClick={toggleDropdown}>Blockchain <span className={styles.icon}><IoIosArrowDown /></span></div>
+          <div className={styles.dropdown} onBlur={closeDropdown} tabIndex="0">
+            <div className={styles.dropdownBtn} onClick={toggleDropdown}>Blockchain <span className={styles.icon}><IoIosArrowDown /></span></div>
             {isOpen && (
-              <div class={styles.dropdownContent}>
+              <div className={styles.dropdownContent}>
                 <a onClick={navigateToBlockchainPage}>Blockchain</a>
                 <a onClick={navigateToTransactionsPage}>Transactions</a>
               </div>
@@ -172,13 +207,17 @@ export default function Header() {
                 <button onClick={togglePopup} className={styles.closeButton}>
                   X
                 </button>
-                <p>Public Key: {accountData.publicKey}</p>
-                <p>privateKey Key: {accountData.privateKey}</p>
-                <p>Address: {accountData.address}</p>
-                <p>Balance: {accountData.balance} ETH</p>
-                <p>stakedETH: {accountData.stakedEth} ETH</p>
-                <button>Stake</button>
-                <button>Transactions</button>
+                <p><span className={styles.spanHeaders}>Public Key&nbsp;&nbsp;&nbsp;&nbsp;: </span>{accountData.publicKey.slice(0, 8)}...{accountData.publicKey.slice(122, 130)} <span className={styles.copyIcon} onClick={handleCopyPublic}><MdContentCopy /></span></p>
+                <br/>
+                <p><span className={styles.spanHeaders}>Private Key&nbsp;&nbsp;: </span>{accountData.privateKey.slice(0, 8)}...{accountData.privateKey.slice(58, 66)} <span className={styles.copyIcon} onClick={handleCopyPrivate}><MdContentCopy /></span></p>
+                <br/>
+                <p><span className={styles.spanHeaders}>Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>{accountData.address.slice(0, 8)}...{accountData.address.slice(34, 42)} <span className={styles.copyIcon} onClick={handleCopyAddress}><MdContentCopy /></span></p>
+                <br/>
+                <p><span className={styles.spanHeaders}>Balance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>{accountData.balance} ETH</p>
+                <br/>
+                <p><span className={styles.spanHeaders}>StakedETH&nbsp;&nbsp;: </span>{accountData.stakedEth} ETH</p>
+                {/* <button>Stake</button>
+                <button>Transactions</button> */}
               </div>
             ) : (
               <div>
