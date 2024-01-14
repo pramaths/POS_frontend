@@ -130,10 +130,10 @@ export default function Header() {
   const handleCreateAccount = async () => {
     try {
 
-      const response = await axios.post("https://proof-of-stake.onrender.com/api/wallet/generatekeys", { withCredentials: true });
-      console.log("hellohhhhh",response.data)
-      Cookie.set("walletaddress", response.data.address)
-      Cookie.set("publicKey", response.data.publicKey)
+      const response = await axios.post("https://proof-of-stake.onrender.com/api/wallet/generatekeys", { withCredentials: true  });
+      // console.log("hellohhhhh",response.data)
+      // Cookie.set("walletaddress", response.data.address)
+      // Cookie.set("publicKey", response.data.publicKey)
       setAccountData(response.data);
       togglePopup();
     } catch (error) {
@@ -165,7 +165,7 @@ export default function Header() {
   Blockchain
 </p> */}
           <div className={styles.dropdown} onBlur={closeDropdown} tabIndex="0">
-            <div className={styles.dropdownBtn} onClick={toggleDropdown}>Blockchain <span className={styles.icon}><IoIosArrowDown /></span></div>
+            <div className={styles.dropdownBtn} onClick={toggleDropdown}>Blockchain <span className={styles.icon}><IoIosArrowDown  /></span></div>
             {isOpen && (
               <div className={styles.dropdownContent}>
                 <a onClick={navigateToBlockchainPage}>Blockchain</a>
@@ -217,7 +217,7 @@ export default function Header() {
                 <br/>
                 <p><span className={styles.spanHeaders}>Balance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>{accountData.balance} ETH</p>
                 <br/>
-                <p><span className={styles.spanHeaders}>StakedETH&nbsp;&nbsp;: </span>{accountData.stakedEth} ETH</p>
+                <p><span className={styles.spanHeaders}>StakedETH&nbsp;&nbsp;: </span>{accountData.stakedEth == 0 ? 0 : accountData.stakedEth } ETH</p>
                 {/* <button>Stake</button>
                 <button>Transactions</button> */}
               </div>
