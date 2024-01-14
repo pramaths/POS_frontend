@@ -59,8 +59,13 @@ export default function Header() {
   const closeDropdown = () => {
     setIsOpen(false);
   }
-
-  // Dropdown states stuff over
+  const cookieAttributes = {
+    secure: true, // because your backend is HTTPS
+    sameSite: 'None', // necessary for cross-site/cross-origin access
+    domain: 'frontend-domain.com', // set to your frontend domain
+    path: '/', // default, can access the cookie in any path of the domain
+    expires: 365 // or any other duration in days
+  };
 
   const router = useRouter();
 
@@ -131,9 +136,9 @@ export default function Header() {
     try {
 
       const response = await axios.post("https://proof-of-stake.onrender.com/api/wallet/generatekeys", { withCredentials: true  });
-      // console.log("hellohhhhh",response.data)
-      // Cookie.set("walletaddress", response.data.address)
-      // Cookie.set("publicKey", response.data.publicKey)
+      console.log("hellohhhhh",response.data)
+      Cookie.set("walletaddress", response.data.address,cookieAttributes)
+      Cookie.set("publicKey", response.data.publicKey,cookieAttributes)
       setAccountData(response.data);
       togglePopup();
     } catch (error) {
