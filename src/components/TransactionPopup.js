@@ -2,7 +2,7 @@ import React, { useState ,useRef } from 'react';
 import '../styles/TransactionPopup.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Cookie from 'js-cookie';
   const TransactionPopup = ({ onClose }) => {
     const popupContentRef = useRef(null);
     
@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
     const defaultData = '0x0';
     const defaultGasPrice = '1';
-  
+    const walletaddress = Cookie.get(walletaddress);
     const handleContainerClick = (event) => {
       if (!popupContentRef.current.contains(event.target)) {
         onClose();
@@ -25,7 +25,8 @@ import 'react-toastify/dist/ReactToastify.css';
         credentials:'include',
         headers: {
           'Content-Type': 'application/json',
-        },
+          'x-wallet-address': walletaddress
+            },
         body: JSON.stringify({
           to : address,
           gasPrice: gasPrice || `${defaultGasPrice}`, 

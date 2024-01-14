@@ -30,6 +30,10 @@ const Node = () => {
     fetch('https://proof-of-stake.onrender.com/api/get/validator', {
       method: 'GET',
       credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-wallet-address': walletaddress
+          },
     })
       .then((response) => {
         if (response.status === 404) {
