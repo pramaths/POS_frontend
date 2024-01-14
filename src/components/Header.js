@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import { MdContentCopy } from "react-icons/md";
 import copy from 'clipboard-copy';
+import { Reem_Kufi } from "next/font/google";
 
 export default function Header() {
   const [ethPrice, setEthPrice] = useState("");
@@ -119,6 +120,7 @@ export default function Header() {
   const fetchAccountData = async () => {
     try {
       const response = await axios.get("https://proof-of-stake.onrender.com/api/get/account", { withCredentials: true });
+      console.log("hduehfuehfh",response.data)
       setAccountData(response.data);
     } catch (error) {
       console.error("Error fetching wallet data:", error);
@@ -129,7 +131,7 @@ export default function Header() {
     try {
 
       const response = await axios.post("https://proof-of-stake.onrender.com/api/wallet/generatekeys", { withCredentials: true });
-      console.log(response.data)
+      console.log("hellohhhhh",response.data)
       Cookie.set("walletaddress", response.data.address)
       Cookie.set("publicKey", response.data.publicKey)
       setAccountData(response.data);
