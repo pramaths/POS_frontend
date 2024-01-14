@@ -23,7 +23,7 @@ export default function Header() {
 
   
   const router = useRouter();
-
+const walletAddress=Cookie.get("walletaddress")
 
   const handleCopyPublic = () => {
     if (accountData.publicKey) {
@@ -117,7 +117,9 @@ export default function Header() {
 
   const fetchAccountData = async () => {
     try {
-      const response = await axios.get("https://proof-of-stake.onrender.com/api/get/account", { withCredentials: true });
+      const response = await axios.get("https://proof-of-stake.onrender.com/api/get/account", { headers: {
+        'X-Wallet-Address': walletAddress
+      },withCredentials: true });
       console.log("hduehfuehfh",response.data)
       setAccountData(response.data);
     } catch (error) {
