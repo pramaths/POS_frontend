@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import styles from "../styles/StakePopup.module.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Cookie from "js-cookie";
 function StakePopup({ onClose }) {
   const [amount, setAmount] = useState("");
   const contentRef = useRef(null);
@@ -18,7 +18,7 @@ function StakePopup({ onClose }) {
       draggable: true,
     });
   };
-
+const walletAddress=Cookie.get('walletaddress')
   const handleStake = async() => {
     const response = await fetch('https://proof-of-stake.onrender.com/api/account/stake', {
   
@@ -26,6 +26,7 @@ function StakePopup({ onClose }) {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
+        'x-wallet-address':walletAddress,
       },
       body: JSON.stringify({amount}),
     });
