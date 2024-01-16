@@ -10,10 +10,10 @@ import Cookie from 'js-cookie';
     const [gasPrice, setGasPrice] = useState('');
     const [amount, setAmount] = useState('');
     const [data, setData] = useState('');
+    const walletAddress=Cookie.get("walletaddress")
 
     const defaultData = '0x0';
     const defaultGasPrice = '1';
-    const walletAddress = Cookie.get(walletaddress);
     const handleContainerClick = (event) => {
       if (!popupContentRef.current.contains(event.target)) {
         onClose();
