@@ -1,138 +1,88 @@
-'use client'
-import React, { useState, useEffect } from 'react';
-import Header from '@/components/Header';
-// import "./accountdetails.css";
-import moment from 'moment';
-const AccountDetails = ({params}) => {
-    const [transactions, setTransactions] = useState([]);
-    const [accountDetails, setAccountDetails] = useState({
-      balance: 0,
-      stakedEth: 0,
-      createdAt: ''
-    });
-    const [walletAddress, setWalletAddress] = useState('');
+"use client"
+import { useContext } from "react";
+import { Link, useParams } from "react-router-dom";
 
-    useEffect(() => {
-        if (params.id) {
-            setWalletAddress(params.id);
-        }
-    }, [params.id]);
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+function Block() {
+    const { blockNumberOrHash } = useParams();
+    console.log("URL Param:", blockNumberOrHash);
+  const  blockNumberOrHassh=123456;
+    let info = null;
+    if (mockBlockData.number == blockNumberOrHassh || mockBlockData.hash == blockNumberOrHash) {
+        info = mockBlockData;
+    }
 
-    useEffect(() => {
-        if (walletAddress) {
-            fetch("https://proof-of-stake.onrender.com/api/get/address/0x4fb3d621b81bd651f6c922c0ee075459e2518512") 
-                .then(response => response.json())
-                .then(data => {
-                    setTransactions(data.transactions);
-                    setAccountDetails(data.account);
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                });
-        }
-    }, [walletAddress]);
-console.log("gygyg",transactions)
-console.log("kkkkkkkk",accountDetails)
+    if (!info) {
+        return <div>Block not found</div>;
+    }
     return (
-        <div>
-            <Header />
-            <div className='accountlayout'>
-            <h4>Address: {walletAddress}</h4> 
-                <div className='accountdetails'>
-                    <div className='acc'>
-                        <div className='accdet'>
-                            <h3>Overview</h3>
-                            <div className='details-design'>
-                            <div>ETH balance</div>
-                            <div>{accountDetails.balance}</div>
-                            </div>
-                            <div className='details-design'>
-                            <div>Staked ETH</div>
-                            <div>{accountDetails.stakedEth}</div>
-                            </div>
-                            <div className='details-design'>
-                            <div>Created At</div>
-                            <div>{accountDetails.createdAt}</div>
-                            </div>
-                        </div>
+        <section>
+            <h1 className="mx-24 my-8 text-xl text-gray-900">
+                Block{" "}
+                <span className="text-gray-500 text-lg ml-1">
+                    #{info?.number}
+                </span>
+            </h1>
+            <div className="bg-white mx-24 px-8 py-4 my-8 border rounded-lg divide-y">
+                <h1 className="pb-3 text-[#3498DA] font-bold">Overview</h1>
+
+                <div className="flex">
+                    <div className="w-1/2 divide-y">
+                        <TitleComponent title="Block" />
+                        <TitleComponent title="Time Stamp" />
+                        <TitleComponent title="Transactions" />
+                        <TitleComponent title="Fee Recipient" />
+                        <TitleComponent title="Gas Used" />
+                        <TitleComponent title="Gas Limit" />
+                        <TitleComponent title="Base Fee Per Gas" />
+                        <TitleComponent title="Extra Data" />
+                        <TitleComponent title="Hash" />
+                        <TitleComponent title="Parent Hash" />
+                        <TitleComponent title="Nonce" />
+                        <TitleComponent title="Difficulty" />
                     </div>
-                    <div className='acc'>
-                        <div className='accdet'>
-                            <h3>More Info</h3>
-                            {transactions.length > 0 && (
-            <>
-                <div className='details-design'>
-                    <div>Last Tx sent</div>
-                    <div>{moment(transactions[0]?.createdAt).fromNow()}</div>
-                </div>
-                <div className='details-design'>
-                    <div>First tx sent</div>
-                    <div>{moment(transactions[transactions.length - 1]?.createdAt).fromNow()}</div>
-                </div>
-                <div className='details-design'>
-                    <div>Total Tx</div>
-                    <div>{transactions.length}</div>
-                </div>
-            </>
-        )}
-                        </div>
-                    </div>
-                    <div className='acc'>
-                        <div className='accdet'>
-                        <h3>More Info</h3>
-                        {transactions.length > 0 && (
-            <>
-                <div className='details-design'>
-                    <div>Last Tx sent</div>
-                    <div>{moment(transactions[0]?.createdAt).fromNow()}</div>
-                </div>
-                <div className='details-design'>
-                    <div>First tx sent</div>
-                    <div>{moment(transactions[transactions.length - 1]?.createdAt).fromNow()}</div>
-                </div>
-                <div className='details-design'>
-                    <div>Total Tx</div>
-                    <div>{transactions.length}</div>
-                </div>
-            </>
-        )}
-                        </div>
+                    <div className="divide-y w-full">
+                        <p className="py-3">{info?.number}</p>
+                        <p className="py-3">{info?.timestamp}</p>
+                        <p className="py-3 text-[#357BAD]">
+                            <Link to={`/txs?block=${info?.number}`}>
+                                {info.transactions != undefined
+                                    ? info.transactions.length
+                                    : 0}
+                                {" transactions"}
+                            </Link>
+                        </p>
+                        <p className="py-3 text-[#357BAD]">
+                            <Link to={`/address/${info.miner}`}>
+                                {info.miner}
+                            </Link>
+                        </p>
+                        <p className="py-3">{info.gasUsed}</p>
+                        <p className="py-3">{info.gasLimit}</p>
+                        <p className="py-3">{info.baseFeeInGwei} Gwei</p>
+                        <p className="py-3">{info.extraData}</p>
+                        <p className="py-3">{info.hash}</p>
+                        <p className="py-3 text-[#357BAD]">
+                            <Link to={`/block/${info.parentHash}`}>
+                                {info.parentHash}
+                            </Link>
+                        </p>
+                        <p className="py-3">{info.nonce}</p>
+                        <p className="py-3">{info.difficulty}</p>
                     </div>
                 </div>
             </div>
-            <div className='acc-table'>
-            <table className="account-details-table">
-            <thead>
-                <tr>
-                    <th>Transaction Hash</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Method</th>
-                    <th>Value</th>
-                    <th>Timestamp</th>
-                    <th>Txn Fee</th>
-                </tr>
-            </thead>
-            <tbody>
-  {transactions.map((transaction, index) => (
-    <tr key={index}>
-      <td>0x{transaction.txHash?.slice(0,20)}...</td>
-      <td>{transaction.sender?.slice(0,15)}...</td>
-      <td>{transaction.recipient?.slice(0,15)}...</td>
-      <td>{transaction.method}</td>
-      <td>{transaction.amount} ETH</td>
-      <td>{moment(transaction.createdAt).fromNow()}</td>
-      <td className={transaction.status === 'mined' ? 'mined-status' : ''}>
-        {transaction.status === 'mined' ? 'Mined' : transaction.status}
-      </td>
-    </tr>
-  ))}
-</tbody>
+        </section>
+    );
+}
 
-        </table>
-        </div>
+function TitleComponent({ title }) {
+    return (
+        <div className="flex items-center">
+            <AiOutlineQuestionCircle />
+            <p className="ml-2 py-3">{title}</p>
         </div>
     );
-};
+}
 
-export default AccountDetails;
+export default Block;

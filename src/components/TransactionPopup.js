@@ -13,7 +13,7 @@ import Cookie from 'js-cookie';
 
     const defaultData = '0x0';
     const defaultGasPrice = '1';
-    const walletaddress = Cookie.get(walletaddress);
+    const walletAddress = Cookie.get(walletaddress);
     const handleContainerClick = (event) => {
       if (!popupContentRef.current.contains(event.target)) {
         onClose();
@@ -25,7 +25,7 @@ import Cookie from 'js-cookie';
         credentials:'include',
         headers: {
           'Content-Type': 'application/json',
-          'x-wallet-address': walletaddress
+          'x-wallet-address': walletAddress
             },
         body: JSON.stringify({
           to : address,
