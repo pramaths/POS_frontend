@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import Header from "../../components/Header"
+import Header from "../../../components/Header"
 import "./accountdetails.css";
 import moment from 'moment';
 const AccountDetails = ({params}) => {
