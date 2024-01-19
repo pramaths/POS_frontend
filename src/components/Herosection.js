@@ -10,8 +10,8 @@ import {
   faServer,
   faFileContract,
 } from "@fortawesome/free-solid-svg-icons";
+import { LineChart, Line } from 'recharts';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const Chart = "/assets/chart.png";
 export default function HeroSection() {
   const [showResult, setShowResult] = useState(true);
   const [blockResult, setBlockResult] = useState([]);
@@ -19,7 +19,7 @@ export default function HeroSection() {
   const [ethPrice, setEthPrice] = useState("");
   const [totalTransactions, setTotalTransactions] = useState(0);
   const [latestBlock, setLatestBlock] = useState("");
-
+const [data,setData]=useState(null)
   const handleStakeConfirm = () => {
     const amountToStake = stakeAmount || "1";
     setShowStakePopup(false);
@@ -29,6 +29,17 @@ export default function HeroSection() {
     const data = transactionData || "0X0";
     setShowTransactionsPopup(false);
   };
+useEffect(() => {
+  const getdata = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/get/transactiongraph");
+      setData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  getdata(); 
+}, []); 
   useEffect(() => {
     const getEthPrice = async () => {
       const response = await axios.get(
@@ -77,7 +88,7 @@ export default function HeroSection() {
 // Get the current date and time
 const currentDate = new Date();
 
-
+console.log("dataaa",data)
 
 
   return (
@@ -171,13 +182,9 @@ const currentDate = new Date();
             <section>
               <section className={styles.hero_averageValue}>
                 <p>Average Transaction Value</p>
-                <Image
-                  src={Chart}
-                  alt="Chart"
-                  className={styles.chart}
-                  width={10}
-                  height={10}
-                />
+                <LineChart width={400} height={100} data={data}>
+    <Line type="monotone" dataKey="count" stroke="#8884d8" />
+  </LineChart>
               </section>
             </section>
           </section>

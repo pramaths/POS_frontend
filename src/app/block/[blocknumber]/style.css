@@ -1,0 +1,60 @@
+.block-container {
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    text-align: left;
+    color: #beb7b7; 
+}
+
+.block-title {
+    font-size: 1.25rem; 
+    color: #000000; 
+}
+
+.block-number {
+    color: #6b7280;
+    font-size: 1.125rem; 
+    margin-left: 0.25rem;
+}
+
+.overview-container {
+    background-color: #111112; 
+    margin-left: 24px;
+    margin-right: 24px;
+    padding: 32px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    border: 1px solid;
+    border-radius: 0.5rem;
+}
+
+.overview-title {
+    padding-bottom: 12px;
+    color: #3498DA;
+    font-weight: bold;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+}
+
+.half-width {
+    width: 50%;
+}
+
+.divider {
+    border-bottom: 1px solid #e5e7eb; 
+    padding-bottom: 12px;
+}
+
+.link-text, .link-color {
+    color: #000000; /* Black text for links */
+}
+
+.py-3 {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
