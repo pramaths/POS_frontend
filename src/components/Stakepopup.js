@@ -6,7 +6,9 @@ import Cookie from "js-cookie";
 function StakePopup({ onClose }) {
   const [amount, setAmount] = useState("");
   const contentRef = useRef(null);
-
+  const walletAddress=Cookie.get('walletaddress')
+  const pubkey=Cookie.get("publicKey")
+  console.log("heirhh",pubkey)
   // Function to display the toast
   const displayToast = (nonce) => {
     toast.success(`Stake Successfull`, {
@@ -18,8 +20,6 @@ function StakePopup({ onClose }) {
       draggable: true,
     });
   };
-const walletAddress=Cookie.get('walletaddress')
-const publickey=Cookie.get("publicKey")
   const handleStake = async() => {
     const response = await fetch('https://proof-of-stake.onrender.com/api/account/stake', {
       method: 'POST',
@@ -27,7 +27,7 @@ const publickey=Cookie.get("publicKey")
       headers: {
         'Content-Type': 'application/json',
         'x-wallet-address':walletAddress,
-        'x-publicKey':publickey
+        'x-publicKey':pubkey
       },
       body: JSON.stringify({amount}),
     });
