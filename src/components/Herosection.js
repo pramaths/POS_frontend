@@ -32,7 +32,7 @@ const [data,setData]=useState(null)
 useEffect(() => {
   const getdata = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/get/transactiongraph");
+      const response = await axios.get("https://proof-of-stake.onrender.com/api/get/transactiongraph");
       setData(response.data);
     } catch (error) {
       console.error(error);
