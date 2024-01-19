@@ -32,7 +32,7 @@ const Node = () => {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'x-wallet-address': walletaddress
+        'x-wallet-address': loggedInUserAddress
           },
     })
       .then((response) => {

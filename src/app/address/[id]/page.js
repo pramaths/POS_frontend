@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import Header from '@/components/Header';
+import Header from "../../../components/Header"
 import "./accountdetails.css";
 import moment from 'moment';
 const AccountDetails = ({params}) => {
@@ -20,7 +20,7 @@ const AccountDetails = ({params}) => {
 
     useEffect(() => {
         if (walletAddress) {
-            fetch("https://proof-of-stake.onrender.com/api/get/address/0x4fb3d621b81bd651f6c922c0ee075459e2518512") 
+            fetch(`https://proof-of-stake.onrender.com/api/get/address/${walletAddress}`) 
                 .then(response => response.json())
                 .then(data => {
                     setTransactions(data.transactions);
