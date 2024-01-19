@@ -24,3 +24,9 @@
 .transactions-table th {
     background-color: #171616;
 }
+.transaction-details{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

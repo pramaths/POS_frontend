@@ -12,13 +12,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { LineChart, Line } from 'recharts';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Search from '../components/Search';
 export default function HeroSection() {
   const [showResult, setShowResult] = useState(true);
   const [blockResult, setBlockResult] = useState([]);
   const [transactionsResult, setTransactionsResult] = useState([]);
   const [ethPrice, setEthPrice] = useState("");
+  const [ethMc, setEthMc] = useState("");
   const [totalTransactions, setTotalTransactions] = useState(0);
-  const [latestBlock, setLatestBlock] = useState("");
+  const [latestBlock, setLatestBlock] = useState([]);
 const [data,setData]=useState(null)
   const handleStakeConfirm = () => {
     const amountToStake = stakeAmount || "1";
@@ -40,6 +42,17 @@ useEffect(() => {
   };
   getdata(); 
 }, []); 
+
+useEffect(() => {
+  const getEthMc = async () => {
+    const response = await axios.get(
+     `https://api.etherscan.io/api?module=stats&action=ethsupply&apikey=HVHTPWF3UJ8P5ZEDNUZYMT28ZZNEEURRD4`
+      ,{}
+    );
+    setEthMc(response.data.result);
+  };getEthMc()
+})
+
   useEffect(() => {
     const getEthPrice = async () => {
       const response = await axios.get(
@@ -76,7 +89,8 @@ useEffect(() => {
       console.log("rrr", responseblocks.data);
       const blocksData = responseblocks.data.blocksdata;
       const lastFiveBlocks = blocksData?.slice(-5).reverse();
-      setLatestBlock(responseblocks.data.latestBlock);
+      const lastblock=blocksData?.slice(-1).reverse();
+      setLatestBlock(lastblock);
       setBlockResult(lastFiveBlocks);
     };
 
@@ -84,14 +98,14 @@ useEffect(() => {
     getBlockInfo();
     latesttransaction();
   }, []);
-
-// Get the current date and time
 const currentDate = new Date();
-
+const marketcap=ethMc*ethPrice/1000000000000000;
 console.log("dataaa",data)
 
 
   return (
+    // <div>
+      // {/* <Search/> */}
     <section className={styles.heroSectionContainer}>
       {showResult && (
         <section>
@@ -151,7 +165,7 @@ console.log("dataaa",data)
                 </section>
                 <section className={styles.hero_box}>
                   <p>MARKET CAP</p>
-                  <p className={styles.heroValues}>$196,968,104,207.00</p>
+                  <p className={styles.heroValues}>${marketcap}</p>
                 </section>
               </section>
             </section>
@@ -175,7 +189,7 @@ console.log("dataaa",data)
                 </section>
                 <section className={styles.hero_box}>
                   <p>LAST FINALIZED BLOCK</p>
-                  <p className={styles.heroValues}>{latestBlock}</p>
+                  <p className={styles.heroValues}>{latestBlock[0]?.index} Mined with {latestBlock[0]?.transactions.length} tx</p>
                 </section>
               </section>
             </section>
@@ -307,5 +321,6 @@ console.log("dataaa",data)
         </section>
       )}
     </section>
+    // </div>
   );
 }
