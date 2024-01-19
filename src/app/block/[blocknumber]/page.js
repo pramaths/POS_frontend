@@ -15,7 +15,7 @@ function Block({params}) {
     useEffect(() => {
         async function fetchBlockData() {
             try {
-                const response = await fetch(`http://proof-of-stake.onrender.com/api/get/block/${blockNo}`);
+                const response = await fetch(`https://proof-of-stake.onrender.com/api/get/block/${blockNo}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
