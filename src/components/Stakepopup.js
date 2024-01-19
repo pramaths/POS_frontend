@@ -19,14 +19,15 @@ function StakePopup({ onClose }) {
     });
   };
 const walletAddress=Cookie.get('walletaddress')
+const publickey=Cookie.get("publicKey")
   const handleStake = async() => {
     const response = await fetch('https://proof-of-stake.onrender.com/api/account/stake', {
-  
       method: 'POST',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         'x-wallet-address':walletAddress,
+        'x-publicKey':publickey
       },
       body: JSON.stringify({amount}),
     });

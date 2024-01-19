@@ -45,7 +45,12 @@ console.log(transactions)
                 {transactions.map((transaction) => (
                     <tr key={transaction.id}>
                         <td>0x{transaction.txHash?.slice(0,8)}....</td>
-                        <td>{transaction.method}</td>
+                        <td>
+                        <td style={{ border: '1px solid black',backgroundColor: '#505050' ,borderRadius:"7px"}}>
+    {transaction.method || "Transfer"}
+</td>
+
+                            </td>
                         <td>0x{transaction.blockHash?.slice(0,5)}</td>
                         <td>{moment(transaction.createdAt).fromNow()}</td>
                         <td>{transaction.sender?.slice(0,10)}...</td>
