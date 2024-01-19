@@ -191,8 +191,13 @@ useEffect(() => {
                                                 <div className='transaction-details'>
                                                  <div>
                                                  <p>Nonce: {transaction.nonce}</p>
-
                                                  </div>
+                                                 <div>
+Sender: {transaction.sender}
+</div>
+<div>
+Recipient: {transaction.recipient}
+</div>
                                                    <div>
                                                    <p>Gas Limit: {transaction.gasLimit}</p>
 
@@ -203,8 +208,14 @@ useEffect(() => {
 <p>Data: {transaction.data}</p>
 
 </div>
-                                                    <p>tx Hash:0x{transaction.txHash}</p>
-                                                    {/* ... other details ... */}
+                                                    <p>Tx Hash:0x{transaction.txHash}</p>
+                                                    <div>
+                                                        Method: Transfer
+                                                    </div>
+                                                    <div>
+                                                   Created At: {moment(transaction.createdAt).fromNow()}
+                                                    </div>
+
                                                 </div>
                                             </td>
                                         </tr>

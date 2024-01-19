@@ -29,4 +29,9 @@
     flex-direction: column;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    line-height: 2rem;
+    border: white solid 0.1rem;
+    border-radius: 1rem;
+    padding: 1rem;
+
 }
