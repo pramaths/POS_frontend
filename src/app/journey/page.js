@@ -20,7 +20,7 @@ const Journey = () => {
             <div className="header">
                 <span className="headerIcon" title="Back to Home" onClick={navigateToHomePage}><IoArrowBackCircleOutline /></span>
                 <h1 className="heading">
-                    Journey of Block&Roll
+                    Journey of Blockzy
                 </h1>
             </div>
             <span className="rocket"><GiRocket /></span>
@@ -176,7 +176,7 @@ const Journey = () => {
 
                      <p>For any queries or information , leave a message at : 
                                 <a href="mailto:uday410ry@gmail.com" className="mailLink"> uday410ry@gmail.com </a>| 
-                                <a href="mailto:pramathpramath30@gmail.com" className="mailLink"> pramathpramath30@gmail.com</a></p>
+                                <a href="mailto:pramaths848@gmail.com" className="mailLink"> pramaths848@gmail.com</a></p>
                </div>
             </div>
 

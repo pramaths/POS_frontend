@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "../styles/Home.module.css";
+import { IoSearch } from "react-icons/io5";
 import { useRouter } from 'next/navigation'; // Import useRouter
 
 export default function Search() {
@@ -39,7 +40,7 @@ export default function Search() {
                             onKeyPress={handleKeyPress}
                         />
                         <button className={styles.btn} onClick={handleSearch}>
-                            {/* SVG and other elements */}
+                            <IoSearch className={styles.searchIcon} />
                         </button>
                     </section>
                 </section>

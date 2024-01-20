@@ -82,6 +82,9 @@
   padding-top: 3rem;
 }
 
+.searchIcon{
+  color: white;
+}
 .adSection {
   display: flex;
   justify-content: center;
