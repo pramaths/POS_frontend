@@ -1,8 +1,8 @@
 .block-container {
-    margin-left: 24px;
-    margin-right: 24px;
-    margin-top: 32px;
-    margin-bottom: 32px;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
     text-align: left;
     color: #beb7b7; 
 }
@@ -47,7 +47,7 @@
 
 .divider {
     border-bottom: 1px solid #e5e7eb; 
-    padding-bottom: 12px;
+    padding-bottom: 1rem;
 }
 
 .link-text, .link-color {
@@ -57,4 +57,32 @@
 .py-3 {
     padding-top: 16px;
     padding-bottom: 16px;
+}
+.info-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid grey; /* Grey underline for each row */
+    padding: 10px 0;
+}
+
+.title-component {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.title {
+    margin-left: 5px;
+}
+
+.transaction-header {
+    cursor: pointer;
+    color: blue; /* Make it obvious it's clickable */
+    margin: 5px 0;
+}
+
+.transaction-details {
+    padding: 5px;
+    background-color: #f3f3f3; /* Light grey background for expanded details */
+    margin-bottom: 5px;
 }

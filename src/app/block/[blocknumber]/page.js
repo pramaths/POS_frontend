@@ -1,17 +1,19 @@
-"use client"
-import React,{useState,useEffect} from "react";
+'use client'
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { useRouter } from 'next/navigation';
 import moment from "moment";
 import './style.css';
 import Header from "@/components/Header";
-function Block({params}) {
-    const router=useRouter()
-    const  blockNo = params.blocknumber;
-    const [info, setInfo] = useState(null); // Store block data in state
-    const [loading, setLoading] = useState(true); // Track if data is loading
-    console.log('useParams:', params.blocknumber);    
+
+function Block({ params }) {
+    const router = useRouter();
+    const blockNo = params.blocknumber;
+    const [info, setInfo] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [expandedTransaction, setExpandedTransaction] = useState(null);
+
     useEffect(() => {
         async function fetchBlockData() {
             try {
@@ -20,17 +22,20 @@ function Block({params}) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                setInfo(data.block); // Set block data
+                setInfo(data.block);
             } catch (error) {
                 console.error("Error fetching block data:", error);
-                setInfo(null); // If error, set block data to null
+                setInfo(null);
             } finally {
-                setLoading(false); // Set loading to false after data is fetched
+                setLoading(false);
             }
         }
         fetchBlockData();
-    }, [router.isReady,router.query,blockNo]); 
-    console.log(info)
+    }, [blockNo]); 
+
+    const toggleTransaction = (index) => {
+        setExpandedTransaction(expandedTransaction === index ? null : index);
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -39,68 +44,64 @@ function Block({params}) {
     if (!info) {
         return <div>Block not found</div>;
     }
+console.log("info",info)
     return (
-        <div><Header/>
-        <section className="block-container">
-        <h1 className="block-title">
-            Block <span className="block-number">#{info?.index}</span>
-        </h1>
-        <div className="overview-container">
-            <h1 className="overview-title">Overview</h1>
-            <div className="flex-container">
-                <div className="half-width divider">
+        <div>
+            <Header />
+            <section className="block-container">
+                <h1 className="block-title">
+                    Block <span className="block-number">#{info?.index}</span>
+                </h1>
+                <div className="overview-container">
+                    <h2 className="overview-title">Overview</h2>
+                    <div className="info-row">
                         <TitleComponent title="Block" />
-                        <TitleComponent title="Time Stamp" />
-                        <TitleComponent title="Transactions" />
-                        <TitleComponent title="Fee Recipient" />
-                        <TitleComponent title="Gas Used" />
-                        <TitleComponent title="Gas Limit" />                     
-                        <TitleComponent title="Extra Data" />
-                        <TitleComponent title="Hash" />
-                        <TitleComponent title="Previos Hash" />
-                        <TitleComponent title="Difficulty" />
+                        <p className="info-content">{info?.nonce}</p>
                     </div>
-                    <div  className="half-width divider">
-                        <p className="py-3">{info?.nonce}</p>
-                        <p className="py-3">{moment(info?.createdDate).fromNow()}</p>
-                        <p className="py-3 text-[#357BAD]">
-                        {info.index && (
-                    <p className="py-3 text-[#357BAD]">
-                        <Link href={`/txs?block=${info.index}`}>
-                            {info.transactions ? `${info.transactions.length} transactions` : '0 transactions'}
-                        </Link>
-                    </p>
-                )}
-                        </p>
-                        <p className="py-3 text-[#357BAD]">
-                        {info.validator && (
-                    <p className="py-3 text-[#357BAD]">
-                        <Link href={`/address/${info?.validator}`}>
-                            {info.miner}
-                        </Link>
-                    </p>
-                )}
-                        </p>
-                        <p className="py-3"></p>
-                        <p className="py-3"> Gwei</p>
-                        <p className="py-3">300000 wei</p>
-                        <p className="py-3">{info?.hash}</p>
-                        <p className="py-3 text-[#357BAD]">
-                        </p>
+                    <div className="info-row">
+                        <TitleComponent title="Hash" />
+                        <p className="info-content">0x{info?.hash}</p>
+                    </div>
+                    <div className="info-row">
+                        <TitleComponent title="Prevhash" />
+                        <p className="info-content">0x{info?.prevHash}</p>
+                    </div>
+                    <div className="info-row">
+                        <TitleComponent title="Validator" />
+                        <p className="info-content">0x{info?.validator?.address}</p>
+                    </div>
+                    <div className="info-row">
+                        <TitleComponent title="Time Stamp" />
+                        <p className="info-content">{moment(info?.createdDate).fromNow()}</p>
+                    </div>
+                    <div className="info-row">
+                        <TitleComponent title="Transactions" />
+                        <div>
+    {info.transactions && info.transactions.map((transaction, index) => (
+        <div key={index} style={{color:"blueviolet"}}>
+            <Link href={`/Transactions?hash=${transaction.txHash}`}>
+                {transaction.txHash}
+            </Link>            
+        </div>
+    ))}
+</div>
+                    </div>
+                    <div className="info-row">
+                        <TitleComponent title="" />
+                        <p className="info-content">0x{info?.validator?.address}</p>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
         </div>
     );
 }
 
 function TitleComponent({ title }) {
     return (
-        <div className="flex-container items-center">
-        <AiOutlineQuestionCircle />
-        <p className="ml-2 py-3">{title}</p>
-    </div>
+        <div className="title-component">
+            <AiOutlineQuestionCircle />
+            <p className="title">{title}</p>
+        </div>
     );
 }
 

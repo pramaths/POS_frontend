@@ -59,7 +59,6 @@ const Node = () => {
       });
 console.log("hey dude",nodeData)
 console.log("hey bro",blocks)
-    // Function to display the toast
     const displayToast = (nonce) => {
       toast.success(`Block mined with nonce : ${nonce}`, {
         position: 'top-right',
@@ -148,7 +147,7 @@ console.log("hey bro",blocks)
                       className={`${styles.block} ${block.validator === loggedInUserAddress ? styles.shiningBorder : ''}`}
                     >
                       <p>Block Index: {block.index}</p>
-                      <p>Validator: {block.validator?.address}</p>
+                      <p>Validator: {block.validator?.address|| block.validator}</p>
                     </div>
                     {index !== blocks.length - 1 && (
                       <img className={styles.chainImage} src="/chain.svg" alt="Chain" />
