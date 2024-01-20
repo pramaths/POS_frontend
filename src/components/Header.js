@@ -24,6 +24,7 @@ export default function Header() {
   
   const router = useRouter();
 const walletAddress=Cookie.get("walletaddress")
+const pubkey=Cookie.get("publicKey")
 
   const handleCopyPublic = () => {
     if (accountData.publicKey) {
@@ -130,7 +131,10 @@ const walletAddress=Cookie.get("walletaddress")
   const handleCreateAccount = async () => {
     try {
 
-      const response = await axios.post("https://proof-of-stake.onrender.com/api/wallet/generatekeys", { withCredentials: true  });
+      const response = await axios.post("https://proof-of-stake.onrender.com/api/wallet/generatekeys", { headers: {
+        'x-wallet-address': walletAddress,
+'x-publickey':pubkey
+      },withCredentials: true });
       console.log("hellohhhhh",response.data)
       Cookie.set("walletaddress", response.data.address)
       Cookie.set("publicKey", response.data.publicKey)
