@@ -20,6 +20,7 @@ import Cookie from 'js-cookie';
       }
     };
     const handleSubmit = async () => {
+      onClose();
       const response = await fetch('https://proof-of-stake.onrender.com/api/create-transaction', {
         method: 'POST',
         credentials:'include',
@@ -36,11 +37,10 @@ import Cookie from 'js-cookie';
           blockHash : "your_block_hash"
         }),
       });
-  
       const responseData = await response.json();
       if(response.status === 200) toast.success('Transaction created successfully');
       console.log(responseData);
-      onClose();
+   
     };
 
     return (
