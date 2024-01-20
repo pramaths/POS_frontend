@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from "../../components/Header"
 import styles from "../../styles/Home.module.css"
+import {useRouter} from 'next/navigation';
 import blockchainStyles from "../../styles/blockchain.module.css";
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
@@ -18,6 +19,8 @@ const Blockchain = () => {
       .catch(err => console.error('Error fetching blocks:', err));
   }, []);
 
+  const router = useRouter();
+
   return (
     <div>
       <section className={styles.main}>
@@ -26,18 +29,19 @@ const Blockchain = () => {
         <div className={blockchainStyles.blockchainContainer}>
 
           <div className={blockchainStyles.leftAds}>
-            <AiOutlineArrowLeft/>
           </div>
 
           <div className={blockchainStyles.blockchainScroll}>
             <div className={blockchainStyles.blockchain}>
               {blocks.map((block, index) => (
                 <React.Fragment key={index}>
+                
                   <div
                     className={blockchainStyles.block}
                     onClick={() => {
                       setSelectedBlock(block);
                       setSelectedTransaction(null);
+                      router.push(`/block/${index+1}`);
                     }}
                   >
                     <div className={blockchainStyles.blocknumber}>
@@ -57,8 +61,9 @@ const Blockchain = () => {
                   }
                 </React.Fragment>
               ))}
+          
             </div>
-            {selectedBlock && (
+            {/* {selectedBlock && (
               <div>
                 <h2>Transactions for Block {blocks.indexOf(selectedBlock) + 1}</h2>
                 <ul>
@@ -74,8 +79,8 @@ const Blockchain = () => {
                   ))}
                 </ul>
               </div>
-            )}
-
+            )} */}
+{/* 
             {selectedTransaction && (
               <div>
                 <h2>Transaction Details</h2>
@@ -92,7 +97,7 @@ const Blockchain = () => {
                   <li>Signature: {selectedTransaction.signature}</li>
                 </ul>
               </div>
-            )}
+            )} */}
           </div>
           <div >
             
@@ -100,7 +105,6 @@ const Blockchain = () => {
 
 
           <div className={blockchainStyles.rightAds}>
-            <AiOutlineArrowRight />
           </div>
 
         </div>

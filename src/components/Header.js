@@ -11,7 +11,6 @@ import { useHistory } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import { MdContentCopy } from "react-icons/md";
 import copy from 'clipboard-copy';
-import { Reem_Kufi } from "next/font/google";
 
 export default function Header() {
   const [ethPrice, setEthPrice] = useState("");
@@ -183,7 +182,7 @@ const pubkey=Cookie.get("publicKey")
             Node
           </p>
 
-          <p onClick={() => setShowTransactionPopup(true)}>
+          <p onClick={() => {if(walletAddress)setShowTransactionPopup(true)}}>
             Start Transaction
           </p>
           <p onClick={handleStakeClick}>

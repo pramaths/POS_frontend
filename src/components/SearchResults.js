@@ -11,7 +11,13 @@ export default function Search() {
     };
 
     const handleSearch = async () => {
-      const modifiedSearchInput = searchInput.substring(2);        router.push(`/Transactions?hash=${modifiedSearchInput}`);
+        if(searchInput.length===42){
+router.push(`/address/${searchInput}`);
+        }
+        else{
+      const modifiedSearchInput = searchInput.substring(2);        
+      router.push(`/Transactions?hash=${modifiedSearchInput}`);
+        }
         setSearchInput(''); // Optional: Clear the search input after search
     };
 
