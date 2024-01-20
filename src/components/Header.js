@@ -165,14 +165,14 @@ const pubkey=Cookie.get("publicKey")
           <span className={styles.blueText}>${Number(ethPrice).toFixed(2)}</span>
         </div>
         <div  className={styles.journey}>
-          <p onClick={navigateToJourneyPage}>Journey of Block&Roll</p>
+          <p onClick={navigateToJourneyPage}>Journey of Blockzy</p>
         </div>
         </div>
       </section>
       <section className={styles.navbar}>
         {/* <Image src="/svg/logo-white.svg" alt="Etherscan Logo" className={styles.logo} width={10} height={5} />
          */}
-        Block & Roll
+        Blockzy
         <section className={styles.menu}>
           <p onClick={navigateToHomePage}>Home</p>
           {/* <p onClick={navigateToBlockchainPage}>
