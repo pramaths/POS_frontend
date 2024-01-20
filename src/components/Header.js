@@ -109,10 +109,10 @@ const pubkey=Cookie.get("publicKey")
   }, []);
 
   const togglePopup = () => {
-    // if(!Cookie.get("walletaddress")){
-    //   alert("Please create an account first");
-    //   return;
-    // }
+    if(!Cookie.get("walletaddress")){
+      alert("Please create an account first");
+      return;
+    }
     setShowPopup(!showPopup);
   };
 
