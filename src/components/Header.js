@@ -64,7 +64,7 @@ const pubkey=Cookie.get("publicKey")
   }
 
   const handleStakeClick = () => {
-    if(!Cookie.get("walletaddress")){
+    if (!Cookie.get("walletaddress")) {
       alert("Please create an account first");
       return;
     }
@@ -81,6 +81,10 @@ const pubkey=Cookie.get("publicKey")
 
   const navigateToTransactionsPage = () => {
     router.push('/Transactions'); // navigating to the transactions page
+  };
+
+  const navigateToJourneyPage = () => {
+    router.push('/journey'); // navigating to the transactions page
   };
 
   const navigateToHomePage = () => {
@@ -156,8 +160,15 @@ const pubkey=Cookie.get("publicKey")
   return (
     <section className={styles.header}>
       <section className={styles.topHeader}>
-        ETH Price:{" "}
-        <span className={styles.blueText}>${Number(ethPrice).toFixed(2)}</span>
+        <div className={styles.topHeaderDiv}>
+        <div>
+          ETH Price:{" "}
+          <span className={styles.blueText}>${Number(ethPrice).toFixed(2)}</span>
+        </div>
+        <div  className={styles.journey}>
+          <p onClick={navigateToJourneyPage}>Journey of Block&Roll</p>
+        </div>
+        </div>
       </section>
       <section className={styles.navbar}>
         {/* <Image src="/svg/logo-white.svg" alt="Etherscan Logo" className={styles.logo} width={10} height={5} />
