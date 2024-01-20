@@ -521,8 +521,11 @@ img {
 .contactHeader {
 	width: 100%;
 	display: flex;
-	background: rgb(238, 174, 202);
-	background: linear-gradient(280deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+	/* background: rgb(238, 174, 202);
+	background: linear-gradient(280deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%); */
+	/* background: rgb(194, 154, 20);
+	background: linear-gradient(0deg, rgba(194, 154, 20, 1) 0%, rgba(0, 0, 0, 1) 100%); */
+	background: whitesmoke;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	flex-direction: row;
@@ -538,6 +541,11 @@ img {
 	background: linear-gradient(0deg, rgba(194, 154, 20, 1) 0%, rgba(0, 0, 0, 1) 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	color: whitesmoke;
 	font-size: 1.8rem;
+}
+
+.mailLink:hover {
+	background: white; 
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
