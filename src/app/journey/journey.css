@@ -9,26 +9,20 @@
 	--first-color-light: hsl(175, 30%, 48%);
 	--first-color-lighten: hsl(175, 40%, 62%);
 	--gradient-color: linear-gradient(180deg,
-			hsl(178, 35%, 45%),
-			hsl(178, 55%, 28%));
+					hsl(178, 35%, 45%),
+					hsl(178, 55%, 28%));
 	--title-color: hsl(175, 40%, 16%);
 	--text-color: hsl(175, 8%, 50%);
 	--white-color: #fff;
 	--body-color: hsl(175, 100%, 99%);
-
+	
 	/*========== Font and typography ==========*/
 	/*.5rem = 8px | 1rem = 16px ...*/
 	--body-font: "Poppins", sans-serif;
 	--h2-font-size: 1.25rem;
 	--normal-font-size: .938rem;
 	--smaller-font-size: .75rem;
-}
-
-body {
-	font-family: var(--body-font);
-	;
-}
-
+  }
 
 /* My Part */
 
@@ -41,7 +35,19 @@ body {
 	width: 100%;
 	margin: 1rem 0.5rem;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center;
+}
+
+.subtitle{
+	font-size : 1.2rem;
+	margin-top: 0.7rem;
+	background: rgb(143,123,123);
+	background: linear-gradient(180deg, rgba(143,123,123,1) 0%, rgba(196,190,190,1) 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
 }
 
 .heading {
@@ -196,8 +202,12 @@ ul li .date {
 .container ul li:nth-child(odd) {
 	float: left;
 	clear: right;
-	text-align: right;
+	text-align: left;
 	transform: translateX(-30px);
+
+	/* .heading{
+		text-align: right;
+	} */
 }
 
 ul li:nth-child(odd) .date {
@@ -402,7 +412,7 @@ img {
 	top: -1px;
 	left: 0;
 	width: 100%;
-	background-color: var(--white-color);
+	background-color: white;
 	color: black;
 	padding: 2.5rem 1.5rem 3.3rem;
 	border-radius: 1rem 1rem;
@@ -431,7 +441,6 @@ img {
 	width: 154px;
 	height: 154px;
 	background: linear-gradient(to right, #7f00ff, #e100ff);
-	;
 	border-radius: 50%;
 	margin: 0 auto 1rem;
 	display: grid;

@@ -22,7 +22,12 @@ const Journey = () => {
                 <h1 className="heading">
                     Journey of Blockzy
                 </h1>
+                <div className="subtitleDiv">
+                <h2 className="subtitle"> Blockzy: Your Gateway to Immersive Ethereum Proof-of-Stake Simulation</h2>
+                </div>
+                
             </div>
+            
             <span className="rocket"><GiRocket /></span>
             <span className="cubes"><GiCubes /></span>
 
@@ -32,28 +37,38 @@ const Journey = () => {
                     <ul>
                         <li>
                             <h3 className="heading">How it Started ?</h3>
-                            <p> It all Started as a part of BlockChain Hackathon conducted by PESU - ISFCR. </p>
+                            <p> The journey of Blockzy started as a part of BlockChain Hackathon conducted by PESU - ISFCR. </p>
                             {/* <a href="#">Read More </a> */}
                             <span className="date">September 2023</span>
                             <span className="circle"></span>
                         </li>
                         <li>
                             <h3 className="heading"> Purpose </h3>
-                            <p> Ease the learning of Blockchain</p>
+                            <p> Ease the process of learning Blockchain through realtime simulation of Ethereum(Proof-of-Stake) Blockchain </p>
                             {/* <a href="#">Read More </a> */}
                             <span className="date">Purpose</span>
                             <span className="circle"></span>
                         </li>
                         <li>
+                            <h3 className="heading">Development Process</h3>
+                            <p> Created a user-friendly interface using modern frontend technologies.  <br/>
+                                Implemented account creation using Ethereum JS, addressing challenges in key management .<br/>
+                                Developed a transaction module for Ethereum transactions and enabled user staking in our PoS model. This phase involved overcoming challenges related to gas computation, network latency, and designing a secure and equitable staking process. <br/>
+                                Established a memory pool and integrated validators, focusing on efficient transaction validation within our PoS system. We resolved challenges around validator selection and consensus mechanisms. </p>
+                            {/* <a href="#">Read More </a> */}
+                            <span className="date">Development</span>
+                            <span className="circle"></span>
+                        </li>
+                        <li>
                             <h3 className="heading">Vision</h3>
-                            <p> Simulate the working of Blockchain through this platform to make the learning of various terminologies and processes involved especially with Ethereum Blockchain </p>
+                            <p> Simulate the working of Blockchain through this platform to facilitate the learning of various terminologies and processes involved especially with Ethereum Blockchain </p>
                             {/* <a href="#">Read More </a> */}
                             <span className="date">Vision</span>
                             <span className="circle"></span>
                         </li>
                         <li>
                             <h3 className="heading">Victory</h3>
-                            <p> First 🏆 place in the hackathon for building this beautiful website</p>
+                            <p> Won 🏆 First place in the hackathon for building "Blockzy: Your Gateway to Immersive Ethereum Proof-of-Stake Simulation"</p>
                             {/* <a href="#">Read More </a> */}
                             <span className="date">November 2023</span>
                             <span className="circle"></span>
