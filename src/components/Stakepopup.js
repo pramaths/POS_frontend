@@ -21,6 +21,7 @@ function StakePopup({ onClose }) {
     });
   };
   const handleStake = async() => {
+    onClose();
     const response = await fetch('https://proof-of-stake.onrender.com/api/account/stake', {
       method: 'POST',
       credentials: 'include',
@@ -31,7 +32,6 @@ function StakePopup({ onClose }) {
       },
       body: JSON.stringify({amount}),
     });
-
     if (response.status === 200) {
       console.log('Staked succesfully.');
       toast.success('Staked succesfully.');
@@ -41,7 +41,7 @@ function StakePopup({ onClose }) {
     }
 
     console.log("Staking amount:", amount);
-    onClose();
+  
   };
 
   const handleOverlayClick = (event) => {
