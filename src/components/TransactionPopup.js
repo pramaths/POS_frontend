@@ -21,7 +21,7 @@ import Cookie from 'js-cookie';
     };
     const handleSubmit = async () => {
       onClose();
-      const response = await fetch('https://proof-of-stake.onrender.com/api/create-transaction', {
+      const response = await fetch('https://pos-backend-plyp.onrender.com/api/create-transaction', {
         method: 'POST',
         credentials:'include',
         headers: {

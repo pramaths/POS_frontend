@@ -10,7 +10,7 @@
 //     useEffect(() => {
 //         const fetchTransactions = async () => {
 //             try {
-//                 const response = await fetch("https://proof-of-stake.onrender.com/api/transactions");
+//                 const response = await fetch("https://pos-backend-plyp.onrender.com/api/transactions");
 //                 const data = await response.json();
 //                 setTransactions(data.transactions.reverse());
 //             } catch (error) {
@@ -94,7 +94,7 @@ const TransactionsPage = () => {
 //     useEffect(() => {
 //         const fetchTransactions = async () => {
 //             try {
-//                 const response = await fetch("https://proof-of-stake.onrender.com/api/transactions");
+//                 const response = await fetch("https://pos-backend-plyp.onrender.com/api/transactions");
 //                 const data = await response.json();
 //                 setTransactions(data.transactions.reverse());
 //                 const hashParam = new URLSearchParams(searchParams).get('hash');
@@ -115,7 +115,7 @@ const TransactionsPage = () => {
 useEffect(() => {
     const fetchTransactions = async () => {
         try {
-            const response = await fetch("https://proof-of-stake.onrender.com/api/transactions");
+            const response = await fetch("https://pos-backend-plyp.onrender.com/api/transactions");
             const data = await response.json();
             const transactionsReversed = data.transactions.reverse();
             const hashParam = new URLSearchParams(searchParams).get('hash');
