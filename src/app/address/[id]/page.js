@@ -20,7 +20,7 @@ const AccountDetails = ({params}) => {
 
     useEffect(() => {
         if (walletAddress) {
-            fetch(`https://pos-backend-plyp.onrender.com/api/get/address/${walletAddress}`) 
+            fetch(`https://pos-backend-yy2e.onrender.com/api/get/address/${walletAddress}`) 
                 .then(response => response.json())
                 .then(data => {
                     setTransactions(data.transactions);

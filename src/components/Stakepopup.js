@@ -22,7 +22,7 @@ function StakePopup({ onClose }) {
   };
   const handleStake = async() => {
     onClose();
-    const response = await fetch('https://pos-backend-plyp.onrender.com/api/account/stake', {
+    const response = await fetch('https://pos-backend-yy2e.onrender.com/api/account/stake', {
       method: 'POST',
       credentials: 'include',
       headers: {

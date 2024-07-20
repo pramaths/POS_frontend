@@ -34,7 +34,7 @@ const [data,setData]=useState(null)
 useEffect(() => {
   const getdata = async () => {
     try {
-      const response = await axios.get("https://pos-backend-plyp.onrender.com/api/get/transactiongraph");
+      const response = await axios.get("https://pos-backend-yy2e.onrender.com/api/get/transactiongraph");
       setData(response.data);
     } catch (error) {
       console.error(error);
@@ -64,7 +64,7 @@ useEffect(() => {
     const latesttransaction = async () => {
       try {
         const responsetransaction = await axios.get(
-          `https://pos-backend-plyp.onrender.com/api/get/transactions`,
+          `https://pos-backend-yy2e.onrender.com/api/get/transactions`,
           { withCredentials: true }
         );
         console.log("hello buddyy", responsetransaction.data);
@@ -82,7 +82,7 @@ useEffect(() => {
 
     const getBlockInfo = async () => {
       const responseblocks = await axios.get(
-        `https://pos-backend-plyp.onrender.com/api/get/blocks`,
+        `https://pos-backend-yy2e.onrender.com/api/get/blocks`,
         { withCredentials: true }
       );
 
