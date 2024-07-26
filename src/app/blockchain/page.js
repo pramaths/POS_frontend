@@ -13,7 +13,7 @@ const Blockchain = () => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   useEffect(() => {
-    fetch("https://pos-backend-yy2e.onrender.com/api/get/blocks")
+    fetch("https://next-pos-backend.vercel.app/api/get/blocks")
       .then(response => response.json())
       .then(data => setBlocks(data.blocksdata))
       .catch(err => console.error('Error fetching blocks:', err));

@@ -121,7 +121,7 @@ const pubkey=Cookie.get("publicKey")
 
   const fetchAccountData = async () => {
     try {
-      const response = await axios.get("https://pos-backend-yy2e.onrender.com/api/get/account", { headers: {
+      const response = await axios.get("https://next-pos-backend.vercel.app/api/get/account", { headers: {
         'X-Wallet-Address': walletAddress
       },withCredentials: true });
       console.log("hduehfuehfh",response.data)
@@ -134,7 +134,7 @@ const pubkey=Cookie.get("publicKey")
   const handleCreateAccount = async () => {
     try {
 
-      const response = await axios.post("https://pos-backend-yy2e.onrender.com/api/wallet/generatekeys", { headers: {
+      const response = await axios.post("https://next-pos-backend.vercel.app/api/wallet/generatekeys", { headers: {
         'x-wallet-address': walletAddress,
 'x-publickey':pubkey
       },withCredentials: true });

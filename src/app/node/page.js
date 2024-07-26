@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const serverUrl = 'https://pos-backend-yy2e.onrender.com';
+const serverUrl = 'https://next-pos-backend.vercel.app';
 
 const loggedInUserAddress = Cookies.get('walletaddress');
 
@@ -27,7 +27,7 @@ const Node = () => {
   }, [blocks]);
 
   useEffect(() => {
-    fetch('https://pos-backend-yy2e.onrender.com/api/get/validator', {
+    fetch('https://next-pos-backend.vercel.app/api/get/validator', {
       method: 'GET',
       credentials: 'include',
       headers: {

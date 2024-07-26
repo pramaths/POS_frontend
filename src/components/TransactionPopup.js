@@ -21,7 +21,7 @@ import Cookie from 'js-cookie';
     };
     const handleSubmit = async () => {
       onClose();
-      const response = await fetch('https://pos-backend-yy2e.onrender.com/api/create-transaction', {
+      const response = await fetch('https://next-pos-backend.vercel.app/api/create-transaction', {
         method: 'POST',
         credentials:'include',
         headers: {

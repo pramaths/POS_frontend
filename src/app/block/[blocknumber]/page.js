@@ -17,7 +17,7 @@ function Block({ params }) {
     useEffect(() => {
         async function fetchBlockData() {
             try {
-                const response = await fetch(`https://pos-backend-yy2e.onrender.com/api/get/block/${blockNo}`);
+                const response = await fetch(`https://next-pos-backend.vercel.app/api/get/block/${blockNo}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
